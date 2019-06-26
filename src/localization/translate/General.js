@@ -21,6 +21,10 @@ export const general_en = {
     btnClear: "Clear",
     btnClose: "Close",
     btnSave: "Save",
+    createdBy: "Created",
+    modifiedBy: "Latest update",
+    createModifiedAt: " at ",
+    createModifiedBy: " by ",
 };
 
 export const general_vn = {
@@ -46,4 +50,8 @@ export const general_vn = {
     btnClear: "Clear",
     btnClose: "Close",
     btnSave: "Save",
+    createdBy: "Created",
+    modifiedBy: "Latest update",
+    createModifiedAt: " at ",
+    createModifiedBy: " by ",
 };

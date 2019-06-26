@@ -4,7 +4,7 @@ import { InputText } from "../common/Input";
 import { upsertDataEffect } from "../../actions/upsertDataEffect";
 import { endpoint } from "../../constants/endpoint";
 import { Form } from "antd";
-import { LoadingPanel } from "../common/CommonComponents/CommonComponents";
+import { LoadingPanel, UpsertXBy } from "../common/CommonComponents/CommonComponents";
 
 
 export const UpsertChainList = ({id, isSubmitButtonClick, isClearButtonClick, callbackSubmitted, callbackCleared, langPrefix}) => {
@@ -39,6 +39,7 @@ export const UpsertChainList = ({id, isSubmitButtonClick, isClearButtonClick, ca
             <Form onSubmit={handleSubmitFrm}>
                 <InputText focus={true} label="Name" value={formValues.name} onChange={handleChangeVal} error={formErrors.name}
                            name="name"/>
+                <UpsertXBy formValues={formValues} langPrefix={langPrefix}/>
             </Form>
         </Fragment>
     );
