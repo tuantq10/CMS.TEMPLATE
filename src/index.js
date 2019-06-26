@@ -1,12 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import MainCheck from './components/MainCheck';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { I18nextProvider } from 'react-i18next';
+import i18n from './localization/i18n';
+import { Provider } from 'react-redux';
+import store from './store/index';
+//lib
+import 'toastr/toastr';
+//css
+import 'toastr/toastr.scss';
+import 'antd/dist/antd.less';
 
-ReactDOM.render(<App />, document.getElementById('root'));
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(
+    <Provider store={store}>
+        <I18nextProvider i18n={i18n}>
+            <Router>
+                <MainCheck/>
+            </Router>
+        </I18nextProvider>
+    </Provider>
+    , document.getElementById('root'));

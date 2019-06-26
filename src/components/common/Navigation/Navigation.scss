@@ -1,0 +1,26 @@
+.logo {
+  height: 32px;
+  margin: 16px;
+
+  .logo-text {
+    color: #fff;
+    vertical-align: middle;
+    display: inline-block;
+    margin: 0 0 0 12px;
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+  img {
+    display: inline-block;
+    height: 32px;
+    vertical-align: middle;
+  }
+}
+
+.navigation-sider {
+  overflow: auto !important;
+  height: 100vh !important;
+  position: fixed !important;
+  left: 0 !important;
+}

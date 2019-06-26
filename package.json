@@ -3,29 +3,48 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "animated-scroll-to": "^1.2.2",
+    "antd": "^3.19.6",
+    "axios": "^0.19.0",
+    "babel-plugin-import": "^1.12.0",
+    "customize-cra": "^0.2.14",
+    "env-cmd": "^9.0.3",
+    "file-saver": "^2.0.2",
+    "history": "^4.9.0",
+    "html-react-parser": "^0.7.1",
+    "i18next": "^17.0.4",
+    "i18next-browser-languagedetector": "^3.0.1",
+    "i18next-xhr-backend": "^3.0.0",
+    "less": "^3.9.0",
+    "less-loader": "^5.0.0",
+    "moment": "^2.24.0",
+    "numeral": "^2.0.6",
     "react": "^16.8.6",
+    "react-app-rewired": "^2.1.3",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "react-google-recaptcha": "^1.0.5",
+    "react-i18next": "^10.11.2",
+    "react-number-format": "^4.0.8",
+    "react-redux": "^7.1.0",
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1",
+    "react-router-ga": "^1.2.0",
+    "react-scripts": "3.0.1",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+    "toastr": "^2.1.4",
+    "use-react-router": "^1.0.7",
+    "validator": "^11.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "clean": "rimraf ./build",
+    "start": "npm run clean && env-cmd -f .env.development.local react-app-rewired start",
+    "build:dev": "npm run clean && env-cmd -f .env.development react-app-rewired build",
+    "build:staging": "npm run clean && env-cmd -f .env.staging react-app-rewired build",
+    "build": "npm run clean && react-app-rewired build"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "browserslist": [],
+  "devDependencies": {
+    "node-sass": "^4.12.0"
   }
 }

@@ -1,0 +1,38 @@
+.grid-paginate {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.div_nk_grid table thead th {
+  padding: 15px 15px;
+}
+
+.div_nk_grid > div > div {
+  padding: 8px;
+}
+
+.div_nk_grid table thead th:first-child {
+  padding-left: 23px;
+}
+
+.div_nk_grid table thead th > span > div .ant-table-column-title {
+  font-weight: bold;
+}
+
+.div_nk_grid table tbody tr td:last-child {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.nk-grid-cell-actions {
+  align-content: center;
+  text-align: center;
+}
+
+.nk-grid-cell-actions > button {
+  margin-right: 5px;
+}
+
+.filter-item {
+  margin-bottom: 8px !important;
+}
