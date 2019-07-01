@@ -3,12 +3,14 @@ import { useTranslation } from 'react-i18next';
 import { InputText } from "../common/Input";
 import { upsertDataEffect } from "../../actions/upsertDataEffect";
 import { endpoint } from "../../constants/endpoint";
-import { Form } from "antd";
+import { Col, Form, Row, Typography } from "antd";
 import { LoadingPanel, UpsertXBy } from "../common/CommonComponents/CommonComponents";
+import './ChainList.less';
 
 
 export const UpsertChainList = ({id, isSubmitButtonClick, isClearButtonClick, callbackSubmitted, callbackCleared, langPrefix}) => {
     const {t} = useTranslation();
+    const {Text} = Typography;
 
     const validateRule = {
         requireds: ['name']
@@ -36,9 +38,16 @@ export const UpsertChainList = ({id, isSubmitButtonClick, isClearButtonClick, ca
     return (
         <Fragment>
             {isLoading && <LoadingPanel/>}
-            <Form onSubmit={handleSubmitFrm}>
-                <InputText focus={true} label="Name" value={formValues.name} onChange={handleChangeVal} error={formErrors.name}
-                           name="name"/>
+            <Form onSubmit={handleSubmitFrm} layout="horizontal">
+                <Row gutter={48}>
+                    <Col span={4} className="form-title">
+                        <Text strong>Name</Text>
+                    </Col>
+                    <Col span={20}>
+                        <InputText focus={true} value={formValues.name} onChange={handleChangeVal} error={formErrors.name} name="name"
+                        onSubmit={handleSubmit}/>
+                    </Col>
+                </Row>
                 <UpsertXBy formValues={formValues} langPrefix={langPrefix}/>
             </Form>
         </Fragment>

@@ -8,11 +8,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { actLoginRequest } from "../../actions/actionAuth";
 import { useTranslation } from "react-i18next";
 import { alertMessage } from "../../utils/function";
-import logo from '../../assets/images/img-logo.jpg'
-import './Login.scss';
+import logo from '../../assets/images/img-logo.jpg';
+import { constants } from "../../constants/constants";
+import useReactRouter from 'use-react-router';
+import './Login.less';
 
 export const Login = () => {
     const {t} = useTranslation();
+    const {history} = useReactRouter();
     const {Title} = Typography;
     const [siteKey, setSiteKey] = useState('');
     const [capChaValue, setCapChaValue] = useState('');
@@ -50,17 +53,24 @@ export const Login = () => {
         setFormValues({...formValues, capChaValue: ''});
     };
 
+    const reDirect = (defaultPath) => {
+        history.go(defaultPath);
+    };
+
     useEffect(() => {
         fetchSiteKeyData();
     }, []);
 
     useEffect(() => {
+        const defaultPath = localStorage.getItem(constants.DefaultPathName);
         if (login && !login.isSuccess && login.errorMessage) {
             setIsLoading(false);
             const message = typeof login.errorMessage === 'string' && login.errorMessage.toLowerCase().indexOf('lock') > -1 ?
                 `${t('login.errorLock')}` : `${t('login.errorLogin')}`;
             alertMessage(`${t('general.error')}`, message, true);
             resetCapCha();
+        } else if (login && login.isSuccess && defaultPath) {
+            reDirect(defaultPath);
         }
     }, [login]);
 

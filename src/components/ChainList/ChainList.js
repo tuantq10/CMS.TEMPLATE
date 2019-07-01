@@ -4,17 +4,17 @@ import { endpoint } from "../../constants/endpoint";
 import { validPermission, formatUTCDateTime } from "../../utils/function";
 import { constants } from "../../constants/constants";
 import GridDataPage from '../common/GridDataPage/GridDataPage';
-// import CreateFormPage from '../../components/common/CreateFormPage';
 import { UpsertChainList } from './UpsertChainList';
 import { WrapText } from "../common/CommonComponents/CommonComponents";
 
 
-export default function () {
+export const ChainList = () => {
     const currentRoutePath = 'chain-list';
     const langPrefix = 'chainList';
     const {t} = useTranslation();
 
     const actionInGrid = {
+        searchHelpText: "Support search name",
         allowInsert: validPermission(constants.Permissions.Insert, currentRoutePath),
         allowUpdate: validPermission(constants.Permissions.Update, currentRoutePath),
         allowDelete: validPermission(constants.Permissions.Delete, currentRoutePath),
@@ -52,14 +52,6 @@ export default function () {
                 ]}
             />
             }
-
-            {/*{!validPermission(constants.Permissions.View, currentRoutePath) && validPermission(constants.Permissions.Insert, currentRoutePath) &&*/}
-            {/*<CreateFormPage*/}
-            {/*    currentRoutePath={currentRoutePath}*/}
-            {/*    langPrefix={langPrefix}*/}
-            {/*    UpsertPopup={UpsertChainList}*/}
-            {/*/>*/}
-            {/*}*/}
         </Fragment>
     );
-}
+};

@@ -2,12 +2,16 @@ import { Login } from './Login/Login';
 import { Dashboard } from "./Dashboard/Dashboard";
 import { ANoOfMiceBookingStatus } from "./Report/ANoOfMiceBookingStatus";
 import { ServiceList } from "./ServiceList/ServiceList";
-import ChainList from './ChainList/ChainList';
+import { CreateServiceItem } from "./ServiceList/CreateServiceItem";
+import { ChainList } from './ChainList/ChainList';
+import { PageNotFound } from "./PageNotFound/PageNotFound";
 
 export default {
     Login,
     Dashboard,
     ANoOfMiceBookingStatus,
     ServiceList,
+    CreateServiceItem,
     ChainList,
+    PageNotFound,
 }

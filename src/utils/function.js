@@ -177,7 +177,7 @@ export const buildReturnUrl = (history, url = '/login', isExpired = false) => {
     history.go(url);
 };
 
-export const removeAcent = (str) => {
+export const removeAccent = (str) => {
     return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
 };
 
@@ -322,4 +322,32 @@ export const buildMultipleQueryParams = (arrData, prefix, exQueryParams = []) =>
         result = [...result, ...exQueryParams]
     }
     return result;
+};
+
+export const isValidComplexity = (str) => {
+    let result = false;
+    const re = new RegExp("^(?=(.*\\d){1})(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z\\d]).{8,100}$");
+    if (re.test(str)) {
+        result = true;
+    }
+    return result;
+};
+
+export const setLoginLocalStorage = (obj) => {
+    if (obj[constants.AuthenKey])
+        localStorage.setItem(constants.AuthenKey, obj[constants.AuthenKey]);
+    if (obj[constants.Email])
+        localStorage.setItem(constants.Email, obj[constants.Email]);
+    if (obj[constants.CurrentUserId])
+        localStorage.setItem(constants.CurrentUserId, obj[constants.CurrentUserId]);
+    if (obj[constants.CurrentUserName])
+        localStorage.setItem(constants.CurrentUserName, obj[constants.CurrentUserName]);
+    if (obj[constants.AccessibleProperties])
+        localStorage.setItem(constants.AccessibleProperties, obj[constants.AccessibleProperties]);
+    if (obj[constants.TokenExpiration])
+        localStorage.setItem(constants.TokenExpiration, obj[constants.TokenExpiration]);
+    if (obj[constants.ValidTo])
+        localStorage.setItem(constants.ValidTo, obj[constants.ValidTo]);
+    if (obj[constants.IsRoleAllowChangeSIC])
+        localStorage.setItem(constants.IsRoleAllowChangeSIC, obj[constants.IsRoleAllowChangeSIC]);
 };

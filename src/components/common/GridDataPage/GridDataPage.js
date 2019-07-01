@@ -1,14 +1,14 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useTranslation } from "react-i18next";
 import { withRouter } from "react-router-dom";
-import { Table, Button, Modal, Card, Form, Row, Col } from 'antd';
+import { Table, Button, Modal, Card, Form, Row, Col, Collapse, Icon } from 'antd';
 import { fetchGridDataEffect } from "../../../actions/fetchGridDataEffect";
 import { constants } from '../../../constants/constants';
 import { buildMultipleQueryParams } from "../../../utils/function";
 import { WrapText, WrapLink } from '../CommonComponents/CommonComponents';
 import { AddButton, IconButtonX } from "../Button";
 import { Paginate } from '../Paginate';
-import './GridDataPage.scss'
+import './GridDataPage.less'
 import { TableSearch } from "../Input";
 
 
@@ -19,7 +19,7 @@ const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableCo
 
     actionInGrid = {
         allowInsert: false, allowUpdate: false, allowDelete: false, upsertRoute: '', allowSearch: true, addBtnOnHeader: false,
-        selectionRender: null, actions: [], disablePaging: false, isReadOnly: false, ...(actionInGrid || {})
+        selectionRender: null, actions: [], disablePaging: false, isReadOnly: false, showAdvanceSearch: true, ...(actionInGrid || {})
     };
 
     const [sortByParam, setSortByParams] = useState(defaultSortBy || {});
@@ -31,7 +31,7 @@ const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableCo
 
     if (!!actionInGrid) {
         useEffect(() => {
-            isLoading && tableCxt && tableCxt.deselectAll();
+            isLoading && tableCxt && setTableCxt(null);
         }, [isLoading]);
 
         useEffect(() => {
@@ -57,7 +57,10 @@ const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableCo
                         : <WrapText text={record.isTotalRow ? <span>{t('general.total')}</span> : text}/>
                 } else {
                     if (item.isBeginTotal) {
-                        item.render = (text, record) => (record.isTotalRow ? <span>{t('general.total')}</span> : <WrapText text={text}/>)
+                        item.render = (text, record, index) => (record.isTotalRow ? <span>{t('general.total')}</span> : {
+                            children: <WrapText text={text}/>,
+                            props: {colSpan: cols.length},
+                        })
                     }
                 }
 
@@ -144,25 +147,6 @@ const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableCo
         handleSortClick(sorter.columnKey)
     };
 
-    // const countIgnoreEmptyId = (ctx) => {
-    //     return ctx.getSelectedIds().filter(x => x != '' && x != constants.EmptyGuidId).length;
-    // };
-
-    // const renderMainBulkToolbar = (ctx) => {
-    //     return (
-    //         <div className={filterComponents && "grid-toolbar-selected-count"}>
-    //             <TableToolbar>
-    //                 <ItemGroup position="start">
-    //                     <SelectedCount>{`${countIgnoreEmptyId(ctx)} Selected`}</SelectedCount>
-    //                 </ItemGroup>
-    //                 <ItemGroup position="end">
-    //                     {actionInGrid.selectionRender && actionInGrid.selectionRender(ctx)}
-    //                 </ItemGroup>
-    //             </TableToolbar>
-    //         </div>
-    //     );
-    // };
-
     const onUpsertPopupClose = () => {
         setUpsertPopupState(initialUpsertPopupState);
     };
@@ -197,89 +181,145 @@ const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableCo
             },
             onCancel() {
             },
+            okType: 'danger',
         });
     }
 
-    return (
+    const countIgnoreEmptyId = (selectedRowKeys) => {
+        const filteredSelectedId = selectedRowKeys.filter(x => x !== '' && x.id !== constants.EmptyGuidId);
+        setTableCxt(filteredSelectedId);
+    };
 
-        <Fragment>
-            {(actionInGrid.allowInsert || actionInGrid.allowUpdate) && !actionInGrid.upsertRoute &&
-            <Modal
-                destroyOnClose={true}
-                visible={upsertPopupState.open}
-                title={upsertPopupState.id === '' ? `${t('general.titlePopUpAdd')}` : (`${actionInGrid.actionEditTitle || t('general.titlePopUpEdit')}`)}
-                onOk={onUpsertPopupSubmit}
-                onCancel={onUpsertPopupClose}
-                footer={[
-                    <Button key="back" onClick={() => upsertPopupState.id === '' ? onUpsertPopupClear() : onUpsertPopupClose()}>
-                        {upsertPopupState.id === '' ? `${t('general.btnClear')}` : `${t('general.btnClose')}`}
-                    </Button>,
-                    <Button key="submit" type="primary" disabled={upsertPopupState.submit || actionInGrid.isReadOnly} onClick={onUpsertPopupClose}>
-                        {t('general.btnSave')}
-                    </Button>,
-                ]}
-            >
-                <UpsertPopup
-                    id={upsertPopupState.id} {...upsertExtraParams || {}}
-                    isSubmitButtonClick={upsertPopupState.submit}
-                    isClearButtonClick={upsertPopupState.clear}
-                    callbackSubmitted={onUpsertPopupSubmitted}
-                    callbackCleared={onUpsertPopupCleared}
-                    onUpserted={onGridActionDone}
-                    langPrefix={langPrefix}
-                    isReadOnly={actionInGrid.isReadOnly}
-                />
-            </Modal>}
-            <div
-                className={`div_nk_grid ${actionInGrid.addBtnOnHeader ? `div_nk_grid_no_head` : ''} ${!actionInGrid.allowInsert && !actionInGrid.allowUpdate && !actionInGrid.allowDelete ? `padding_latest_col` : ''} ${!!actionInGrid.selectionRender ? `first_col_is_checkbox` : ''} ${className || ""}`}>
-                {/*{!actionInGrid.addBtnOnHeader && !actionInGrid.selectionRender && renderMainToolbar()}*/}
-                {/*{!actionInGrid.addBtnOnHeader && !!actionInGrid.selectionRender &&*/}
-                {/*<Table.ToolbarContainer>*/}
-                {/*    {ctx => {*/}
-                {/*        setTableCxt(ctx);*/}
-                {/*        return countIgnoreEmptyId(ctx) > 0 ? renderMainBulkToolbar(ctx) : renderMainToolbar()*/}
-                {/*    }}*/}
-                {/*</Table.ToolbarContainer>*/}
-                {/*}*/}
-                <Card bordered={false}>
-                    <Form className="filter-search-form">
-                        <Row gutter={8}>
-                            <Col span={23}>
-                                <Row gutter={26} type="flex" justify="end">
-                                    {
-                                        (filterComponents || []).map((x, k) => {
+    const rowSelection = {
+        selectedRowKeys: tableCxt,
+        onChange: (selectedRowKeys, selectedRows) => {
+            if (selectedRowKeys) {
+                countIgnoreEmptyId(selectedRowKeys)
+            }
+        },
+    };
+    const {Panel} = Collapse;
+    const renderMainToolbar = () => {
+        return (
+            <Fragment>
+                <Col span={22}>
+                    <Row gutter={26} type="flex" justify="end">
+                        {
+                            (filterComponents || []).map((x, k) => {
+                                if (!actionInGrid.showAdvanceSearch || (actionInGrid.showAdvanceSearch && filterComponents.length > 3 && k <= 2)) {
+                                    return (
+                                        <Col span={6} key={k}>
+                                            <Form.Item key={k}>
+                                                {x.render(handleFilter, ddlFilterParams)}
+                                            </Form.Item>
+                                        </Col>
+                                    );
+                                }
+                            })
+                        }
+                        <Col span={6} key="search-form">
+                            <Form.Item key="search-form">
+                                {actionInGrid.allowSearch && <TableSearch onSearch={changeKeySearch} helpText={actionInGrid.searchHelpText}/>}
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    {actionInGrid.showAdvanceSearch && filterComponents && filterComponents.length > 3 && <Collapse bordered={false}>
+                        <Panel header="Advance Search" key="1" className="filter-panel" extra={<Icon type="search"/>}>
+                            <Row gutter={28} type="flex" justify="start">
+                                {
+                                    (filterComponents || []).map((x, k) => {
+                                        if (filterComponents.length > 3 && k >= 3) {
                                             return (
-                                                <Col span={5} key={k}>
-                                                    <Form.Item className="filter-item">
+                                                <Col span={6} key={k}>
+                                                    <Form.Item key={k}>
                                                         {x.render(handleFilter, ddlFilterParams)}
                                                     </Form.Item>
                                                 </Col>
                                             );
-                                        })
-                                    }
-                                    <Col span={5} key="search-form">
-                                        <Form.Item className="filter-item">
-                                            {actionInGrid.allowSearch && <TableSearch onSearch={changeKeySearch}/>}
-                                        </Form.Item>
-                                    </Col>
+                                        }
+                                    })
+                                }
+                            </Row>
+                        </Panel>
+                    </Collapse>}
+                </Col>
+                {(actionInGrid.allowInsert || toolbarBtns) &&
+                <Col span={2}>
+                    <Row type="flex" justify="center">
+                        <Form.Item key="add-button">
+                            {actionInGrid.allowInsert && <AddButton onClick={handleAddClick}/>}
+                        </Form.Item>
+                        {toolbarBtns}
+                    </Row>
+                </Col>}
+            </Fragment>
+        );
+    };
 
-                                </Row>
-                            </Col>
-                            <Col span={1}>
-                                <Row type="flex" justify="end">
-                                    {actionInGrid.allowInsert && <AddButton onClick={handleAddClick}/>}
-                                </Row>
-                            </Col>
+    const renderMainBulkToolbar = () => {
+        return (
+            <Fragment>
+                <Col span={24}>
+                    <Row type="flex" justify="end">
+                        {actionInGrid.selectionRender && actionInGrid.selectionRender(tableCxt)}
+                    </Row>
+                </Col>
+            </Fragment>
+        );
+    };
+
+    return (
+        <Fragment>
+            {(actionInGrid.allowInsert || actionInGrid.allowUpdate) && !actionInGrid.upsertRoute &&
+            <Modal width={upsertPopupWidth || 550} centered
+                   destroyOnClose={true}
+                   visible={upsertPopupState.open}
+                   title={upsertPopupState.id === '' ? `${t('general.titlePopUpAdd')}` : (`${actionInGrid.actionEditTitle || t('general.titlePopUpEdit')}`)}
+                   onOk={onUpsertPopupSubmit}
+                   onCancel={onUpsertPopupClose}
+                   footer={[
+                       <Button key="back" onClick={() => upsertPopupState.id === '' ? onUpsertPopupClear() : onUpsertPopupClose()}>
+                           {upsertPopupState.id === '' ? `${t('general.btnClear')}` : `${t('general.btnClose')}`}
+                       </Button>,
+                       <Button key="submit" type="primary" disabled={upsertPopupState.submit || actionInGrid.isReadOnly} onClick={onUpsertPopupSubmit}>
+                           {t('general.btnSave')}
+                       </Button>
+                   ]}
+                   confirmLoading={upsertPopupState.submit || actionInGrid.isReadOnly}
+                   okButtonProps={{disabled: upsertPopupState.submit || actionInGrid.isReadOnly}}
+            >
+                <div className="modal-body">
+                    {UpsertPopup && <UpsertPopup id={upsertPopupState.id} {...upsertExtraParams || {}}
+                                                 isSubmitButtonClick={upsertPopupState.submit}
+                                                 isClearButtonClick={upsertPopupState.clear}
+                                                 callbackSubmitted={onUpsertPopupSubmitted}
+                                                 callbackCleared={onUpsertPopupCleared}
+                                                 onUpserted={onGridActionDone}
+                                                 langPrefix={langPrefix}
+                                                 isReadOnly={actionInGrid.isReadOnly}/>
+                    }
+                </div>
+            </Modal>}
+            <div
+                className={`div_nk_grid ${actionInGrid.addBtnOnHeader ? `div_nk_grid_no_head` : ''} ${!actionInGrid.allowInsert && !actionInGrid.allowUpdate && !actionInGrid.allowDelete ? `padding_latest_col` : ''} ${!!actionInGrid.selectionRender ? `first_col_is_checkbox` : ''} ${className || ""}`}>
+                <Card bordered={false}>
+                    <Form className="filter-search-form">
+                        <Row gutter={8}>
+                            {!actionInGrid.addBtnOnHeader && !actionInGrid.selectionRender ? renderMainToolbar() : !!actionInGrid.selectionRender
+                            && tableCxt && tableCxt.length > 0 ? renderMainBulkToolbar() : renderMainToolbar()
+                            }
                         </Row>
                     </Form>
                 </Card>
-                <Table pagination={false}
-                       rowKey={record => record.id}
-                       dataSource={data.data}
-                       columns={buildTableColumns(tableColumns)}
-                       loading={isLoading}
-                       rowClassName={record => record.isTotalRow ? "grid-total-row" : null}
-                       onChange={onHandleChange}
+                <Table
+                    rowSelection={!!actionInGrid.selectionRender ? rowSelection : null}
+                    pagination={false}
+                    rowKey={record => record.id}
+                    dataSource={data.data}
+                    columns={buildTableColumns(tableColumns)}
+                    loading={isLoading}
+                    rowClassName={record => record.isTotalRow ? "grid-total-row" : null}
+                    onChange={onHandleChange}
                 />
                 {!actionInGrid.disablePaging &&
                 <div className="grid-paginate">

@@ -4,7 +4,7 @@ import { constants } from "../../../constants/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { loadMenuRequest } from "../../../actions/actionMenu";
 import useReactRouter from 'use-react-router';
-import './Navigation.scss';
+import './Navigation.less';
 import { Link } from "react-router-dom";
 import { generateTitle } from "../../../utils/function";
 import logo from '../../../assets/images/img-logo.jpg'
@@ -166,7 +166,7 @@ export const Navigation = ({isCollapsed, width}) => {
     };
 
     return (
-        <Sider className="navigation-sider" width={width || 260} collapsed={collapsed} onCollapse={onHandleMenuCollapse}>
+        <Sider collapsible className="navigation-sider" width={width || 260} collapsed={collapsed} onCollapse={onHandleMenuCollapse}>
             <div className="logo">
                 <img src={logo} alt="logo"/>
                 <h1 className="logo-text">CMS Template</h1>

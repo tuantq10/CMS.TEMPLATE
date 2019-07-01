@@ -2,7 +2,7 @@ import React from 'react';
 import { Tooltip, Spin, Button } from "antd";
 import { useTranslation } from "react-i18next";
 import { formatUTCDateTime } from "../../../utils/function";
-import './CommonComponents.scss';
+import './CommonComponents.less';
 
 export const WrapText = ({text}) => {
     return (

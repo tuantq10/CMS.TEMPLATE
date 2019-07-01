@@ -4,10 +4,17 @@ import React, { useState, forwardRef } from 'react';
 import { constants } from "../../constants/constants";
 import NumberFormat from 'react-number-format';
 import { useTranslation } from "react-i18next";
+import debounce from 'lodash/debounce';
 
-export const InputText = ({label, name, value, error, onChange, maxLength, disabled, className, placeholder, focus, type}) => {
+
+export const InputText = ({label, name, value, error, onChange, maxLength, disabled, className, placeholder, focus, type, onSubmit}) => {
     const handleChange = (evt) => {
         onChange && onChange(name, evt.target.value);
+    };
+
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+        onSubmit && onSubmit();
     };
 
     return (
@@ -16,13 +23,13 @@ export const InputText = ({label, name, value, error, onChange, maxLength, disab
                 <Input placeholder={placeholder || ''} type={type || 'text'}
                        name={name} value={value || ''} onChange={handleChange}
                        disabled={!!disabled} autoFocus={!!focus}
-                       maxLength={maxLength || 500} autoComplete="off"/>
+                       maxLength={maxLength || 500} autoComplete="off" onPressEnter={handleSubmit}/>
             </Tooltip>
         </Form.Item>
     );
 };
 
-export const InputNumOnly = ({label, name, value, error, onChange, maxLength, disabled, className, placeholder, focus}) => {
+export const InputNumOnly = ({label, name, value, error, onChange, maxLength, disabled, className, placeholder, focus, onSubmit}) => {
     const handleChange = (evt) => {
         const value = evt.target.value;
         if (value !== '') {
@@ -34,10 +41,15 @@ export const InputNumOnly = ({label, name, value, error, onChange, maxLength, di
         onChange && onChange(name, value);
     };
 
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+        onSubmit && onSubmit();
+    };
+
     return (
         <Form.Item label={label} validateStatus={!!error ? 'error' : ''} className={className || ''} hasFeedback>
             <Tooltip placement="topRight" title={error || ''}>
-                <Input placeholder={placeholder || ''}
+                <Input placeholder={placeholder || ''} onPressEnter={handleSubmit}
                        name={name} value={value || ''} onChange={handleChange}
                        disabled={!!disabled} autoFocus={!!focus}
                        maxLength={maxLength || 500} autoComplete="off"/>
@@ -46,7 +58,7 @@ export const InputNumOnly = ({label, name, value, error, onChange, maxLength, di
     );
 };
 
-export const TextArea = ({label, name, value, error, onChange, maxLength, disabled, className, placeholder, focus, rows}) => {
+export const TextArea = ({label, name, value, error, onChange, maxLength, disabled, className, placeholder, focus, rows, autosize}) => {
     const handleChange = (evt) => {
         onChange && onChange(name, evt.target.value);
     };
@@ -54,9 +66,26 @@ export const TextArea = ({label, name, value, error, onChange, maxLength, disabl
     return (
         <Form.Item label={label} validateStatus={!!error ? 'error' : ''} className={className || ''} hasFeedback>
             <Tooltip placement="topRight" title={error || ''}>
-                <Input.TextArea placeholder={placeholder || ''}
+                <Input.TextArea placeholder={placeholder || ''} autosize={autosize}
                                 name={name} value={value || ''} onChange={handleChange}
                                 disabled={!!disabled} autoFocus={!!focus} rows={rows || 3}
+                                maxLength={maxLength || 500} autoComplete="off"/>
+            </Tooltip>
+        </Form.Item>
+    );
+};
+
+export const InputPassword = ({label, name, value, error, onChange, maxLength, disabled, className, placeholder, focus, onSubmit}) => {
+    const handleChange = (evt) => {
+        onChange && onChange(name, evt.target.value);
+    };
+
+    return (
+        <Form.Item label={label} validateStatus={!!error ? 'error' : ''} className={className || ''} hasFeedback>
+            <Tooltip placement="topRight" title={error || ''}>
+                <Input.Password placeholder={placeholder || ''} onPressEnter={onSubmit}
+                                name={name} value={value || ''} onChange={handleChange}
+                                disabled={!!disabled} autoFocus={!!focus}
                                 maxLength={maxLength || 500} autoComplete="off"/>
             </Tooltip>
         </Form.Item>
@@ -92,8 +121,31 @@ export const AntDateTimeRangePicker = ({onChange, startOnToDate, dateFormat, fro
     );
 };
 
+export const DatePicker = ({label, name, value, error, onChange, placeHolder, disabled, className, allowClear = true}) => {
+    const {t} = useTranslation();
+
+    const handleChange = date => {
+        onChange(name, date ? date.format(constants.DateFormatFromDB) : null);
+    };
+
+    return (
+        <Form.Item label={label} validateStatus={!!error ? 'error' : ''} hasFeedback>
+            <Tooltip placement="topRight" title={error || ''}>
+                <AntDatePicker
+                    name={name} className={className || ''}
+                    value={moment(value).isValid() ? moment(value) : null}
+                    onChange={handleChange}
+                    disabled={!!disabled}
+                    format={constants.DatePickerFormat}
+                    placeholder={placeHolder || t('general.selectDatePlaceHolder')}
+                    allowClear={allowClear}/>
+            </Tooltip>
+        </Form.Item>
+    );
+};
+
 export const InputNum = forwardRef((props, ref) => {
-    const {label, name, value, error, onChange, disabled, placeholder, isWarning, focus, type, decimalScale = 2, sep = true, max = 0} = props;
+    const {label, name, value, error, onChange, disabled, placeholder, isWarning, focus, type, onSubmit, decimalScale = 2, sep = true, max = 0} = props;
 
     const handleChange = (val) => {
         if (max > 0 && val && val.floatValue > max)
@@ -101,23 +153,30 @@ export const InputNum = forwardRef((props, ref) => {
         onChange && onChange(name, val.floatValue)
     };
 
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+        onSubmit && onSubmit();
+    };
+
     return (
-        <Form.Item label={label} validateStatus={!!error ? 'error' : (!!isWarning ? 'warning' : '')} hasFeedback>
-            <Tooltip placement="topRight" title={error || ''}>
-                <NumberFormat
-                    ref={ref} className="ant-input"
-                    placeholder={placeholder || ''} displayType={type || 'input'}
-                    name={name} value={value || ''} onValueChange={handleChange}
-                    focus={(!!focus).toString()} disabled={!!disabled}
-                    maxLength={20} thousandSeparator={sep} allowNegative={false}
-                    decimalScale={decimalScale}
-                />
-            </Tooltip>
-        </Form.Item>
+        <form onSubmit={handleSubmit}>
+            <Form.Item label={label} validateStatus={!!error ? 'error' : (!!isWarning ? 'warning' : '')} hasFeedback>
+                <Tooltip placement="topRight" title={error || ''}>
+                    <NumberFormat
+                        ref={ref} className="ant-input"
+                        placeholder={placeholder || ''} displayType={type || 'input'}
+                        name={name} value={value || ''} onValueChange={handleChange}
+                        focus={(!!focus).toString()} disabled={!!disabled}
+                        maxLength={20} thousandSeparator={sep} allowNegative={false}
+                        decimalScale={decimalScale}
+                    />
+                </Tooltip>
+            </Form.Item>
+        </form>
     );
 });
 
-export const TableSearch = ({onSearch}) => {
+export const TableSearch = ({onSearch, helpText, placeholder}) => {
     const {t} = useTranslation();
     const [keySearchParam, setKeySearchParams] = useState('');
 
@@ -125,12 +184,27 @@ export const TableSearch = ({onSearch}) => {
         onSearch(keySearchParam);
     };
 
+    const handleChange = (evt) => {
+        const value = evt.target.value;
+        if (value === '')
+            searchOnClear('');
+        else
+            searchOnClear(evt.target.value)
+    };
+
+    const searchOnClear = debounce((keySearch) => {
+        onSearch(keySearch);
+    }, 1000);
+
     return (
-        <Form onSubmit={evt => onSearch(keySearchParam, evt)}>
-            <Input placeholder={t('general.search')} onChange={evt => setKeySearchParams(evt.target.value)}
-                   onPressEnter={onHandleSearch} allowClear={true}
-                   prefix={<Icon type="search"/>}
-            />
-        </Form>
+        <Input placeholder={placeholder || t('general.search')} onChange={handleChange}
+               onPressEnter={onHandleSearch} allowClear={true}
+               prefix={<Icon type="search"/>}
+               suffix={
+                   helpText && <Tooltip title={helpText}>
+                       <Icon type="info-circle"/>
+                   </Tooltip>
+               }
+        />
     );
 };

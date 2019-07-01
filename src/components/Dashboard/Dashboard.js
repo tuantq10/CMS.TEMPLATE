@@ -22,6 +22,9 @@ export const Dashboard = () => {
                 <Button type="primary" onClick={(e) => onHandleClick('/chain-list')}>Push To Chain List</Button>
                 <br/>
                 <br/>
+                <Button type="primary" onClick={(e) => onHandleClick('/service-list')}>Push To Service List</Button>
+                <br/>
+                <br/>
                 {t('general.errorMessageIsUse')}
                 <br/>
                 ...

@@ -1,0 +1,127 @@
+.picky-dropdown > .picky {
+  -webkit-appearance: none !important;
+  outline: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+}
+
+.picky-dropdown > .picky > button {
+  border-color: #d9d9d9 !important;
+  background-color: #FFFFFF !important;
+  color: #162D3D !important;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 32px;
+  -webkit-appearance: none !important;
+  outline: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+}
+
+.picky-dropdown > .picky > button:hover {
+  border-color: #1890ff !important;
+}
+
+.picky-dropdown > .picky > .picky__dropdown::-webkit-scrollbar-thumb:hover {
+  background-color: color(~`colorPalette('@{primary-color}', 1) `);
+}
+
+.picky-dropdown > .picky > .picky__dropdown::-webkit-scrollbar-thumb:active {
+  background-color: #3899EC;
+}
+
+.picky-dropdown > .picky > .picky__dropdown {
+  border-radius: 3px !important;
+  box-shadow: 0 6px 6px 0 rgba(22, 45, 61, 0.06), 0 0 18px 0 rgba(22, 45, 61, 0.12) !important;
+  background: #FFFFFF !important;
+  border: none !important;
+}
+
+.picky-dropdown > .picky > .picky__dropdown > .picky__filter > input {
+  border-color: #d9d9d9 !important;
+  padding: 0 5px 0 5px;
+  outline: none !important;
+  border-radius: 3px;
+}
+
+.picky-dropdown > .picky > .picky__input::after {
+  content: "";
+  width: 30px;
+  height: 30px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6' fill='currentColor' width='10' height='6'%3E%3Cpath d='M5 4.1L0.7 0 0 0.7 5 5.6 10 0.7 9.3 0z'%3E%3C/path%3E%3C/svg%3E") 0 0 no-repeat !important;
+  top: 14px;
+  right: -7px;
+  position: absolute;
+  display: inline-block;
+  border: none !important;
+}
+
+.picky-dropdown > .picky > .picky__input > span {
+  font-size: 14px !important;
+  color: rgba(0, 0, 0, 0.65);
+  padding: 0 6px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+  width: 90%;
+  line-height: 20px;
+}
+
+.picky-dropdown > .picky > .picky__dropdown {
+  top: 38px;
+}
+
+.picky-dropdown > .picky > .picky__dropdown .option {
+  border-bottom: none !important;
+  padding: 6px 20px 6px 7px;
+  font-size: 14px;
+  line-height: 24px;
+  -webkit-appearance: none !important;
+  outline: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+}
+
+.picky-dropdown > .picky > .picky__dropdown .option > span {
+  margin-right: 8px;
+}
+
+.picky-dropdown > .picky > .picky__dropdown .option > input[type=checkbox] {
+  margin-right: 8px;
+  -webkit-appearance: none !important;
+  border: 1px solid #d9d9d9;
+  padding: 6px;
+  border-radius: 2px;
+  display: inline-block;
+  position: relative;
+  outline: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+}
+
+.picky-dropdown > .picky > .picky__dropdown .option {
+  -webkit-appearance: none !important;
+  outline: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+}
+
+.picky-dropdown > .picky > .picky__dropdown .option > input[type=checkbox]:checked {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 8' fill='%23fff' width='10' height='8'%3E%3Cpath d='M3.5 5.2L1.2 3 0 4.2 3.5 7.8 10 1.2 8.8 0z'%3E%3C/path%3E%3C/svg%3E") 0 0 no-repeat;
+  background-color: #3899EC;
+  background-position: center;
+  border: 1px solid #3899EC;
+}
+
+.picky-dropdown > .picky > .picky__dropdown .option.selected, .picky__dropdown li.selected {
+  background-color: #fff !important;
+}
+
+.picky-dropdown > .picky > .picky__dropdown .option:hover, .picky__dropdown .option.selected, .picky__dropdown li.selected {
+  background-color: #EAF7FF !important;
+}
+
+.picky-dropdown > .picky > .picky__dropdown > .picky__filter > input::placeholder {
+  color: #7A92A5;
+}

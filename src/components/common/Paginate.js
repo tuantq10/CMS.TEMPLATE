@@ -27,7 +27,7 @@ export const Paginate = ({currentPage, totalPage, totalItems, onHandleClick, onH
     };
 
     const showTotal = (total, range) => {
-        return parse(`Founded <strong>${total}</strong> item(s). Showing <strong>${range[0]}-${range[1]}</strong> of ${total} items.`)
+        return total > 0 ? parse(`Founded <strong>${total}</strong> item(s). Showing <strong>${range[0]}-${range[1]}</strong> of ${total} items.`) : '';
     };
 
     return (

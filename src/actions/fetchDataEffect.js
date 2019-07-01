@@ -27,12 +27,13 @@ export const fetchDataEffect = (url, initialQueryParams) => {
             try {
                 const filterQuery = buildQueryStringFetchData(queryParams);
                 const apiUrl = `${url}?rdk=1${filterQuery}`;
-                const result = await authApi({ url: apiUrl, cancelToken: source.token });
+                const result = await authApi({url: apiUrl, cancelToken: source.token});
 
                 if (isMounted.current) {
                     setData(result && result.data && result.data.data ? result.data.data : []);
                 }
-            } catch (error) { }
+            } catch (error) {
+            }
 
             setIsLoading(false);
             setIsLoaded(true);

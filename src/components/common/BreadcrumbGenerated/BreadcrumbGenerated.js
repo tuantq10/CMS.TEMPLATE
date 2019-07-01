@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Breadcrumb } from 'antd';
 import { useSelector } from "react-redux";
-import './BreadcrumbGenerated.scss'
+import './BreadcrumbGenerated.less'
 import useReactRouter from 'use-react-router';
 import { generateTitle } from "../../../utils/function";
 

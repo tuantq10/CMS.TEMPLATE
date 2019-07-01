@@ -15,6 +15,7 @@ module.exports = override(
             "@table-padding-horizontal": "8px",
             "@link-color": "#1890ff",
             "@font-family": "'Helvetica Neue', Arial, sans-serif",
+            "@form-item-margin-bottom": "0px",
         },
     }),
 );

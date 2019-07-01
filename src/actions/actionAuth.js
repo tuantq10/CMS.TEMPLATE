@@ -1,6 +1,6 @@
 import { callApi, callAuthApi } from "../utils/apiCaller";
 import { endpoint } from "../constants/endpoint";
-import { validErrorCode } from "../utils/function";
+import { validErrorCode, setLoginLocalStorage } from "../utils/function";
 import { constants } from "../constants/constants";
 import * as Types from '../constants/types';
 import * as moment from 'moment';
@@ -8,6 +8,7 @@ import * as moment from 'moment';
 export const actLoginRequest = (login) => {
     return dispatch => {
         if (login) {
+            let redirectRoute = '';
             const data = {
                 "Email": login.email,
                 "Password": login.password,
@@ -17,14 +18,16 @@ export const actLoginRequest = (login) => {
                 validErrorCode(res.status);
                 login.isSuccess = res.status === 200;
                 if (login.isSuccess) {
-                    localStorage.setItem(constants.AuthenKey, res.data.data.token);
-                    localStorage.setItem(constants.Email, login.email);
-                    localStorage.setItem(constants.CurrentUserId, res.data.data.userId);
-                    localStorage.setItem(constants.CurrentUserName, res.data.data.fullName);
-                    localStorage.setItem(constants.AccessibleProperties, JSON.stringify(res.data.data.accessibleProperties));
-                    localStorage.setItem(constants.TokenExpiration, moment.utc(res.data.data.expiration).local().format(constants.DateTimeFormatFromDB));
-                    localStorage.setItem(constants.ValidTo, res.data.data.validTo);
-                    localStorage.setItem(constants.IsRoleAllowChangeSIC, res.data.data.isRoleAllowChangeSIC);
+                    setLoginLocalStorage({
+                        [`${constants.AuthenKey}`]: res.data.data.token,
+                        [`${constants.Email}`]: login.email,
+                        [`${constants.CurrentUserId}`]: res.data.data.userId,
+                        [`${constants.CurrentUserName}`]: res.data.data.fullName,
+                        [`${constants.AccessibleProperties}`]: JSON.stringify(res.data.data.accessibleProperties),
+                        [`${constants.TokenExpiration}`]: moment.utc(res.data.data.expiration).local().format(constants.DateTimeFormatFromDB),
+                        [`${constants.ValidTo}`]: res.data.data.validTo,
+                        [`${constants.IsRoleAllowChangeSIC}`]: res.data.data.isRoleAllowChangeSIC
+                    });
                     callAuthApi(endpoint.accessibleMenu).then(res => {
                         if (res.status === 200) {
                             const data = res.data.data;
@@ -33,17 +36,16 @@ export const actLoginRequest = (login) => {
                                 if (firstRoute) {
                                     const route = firstRoute.permissions && firstRoute.permissions.length > 0 ? firstRoute : firstRoute.routes[0];
                                     if (route) {
-                                        localStorage.setItem(constants.DefaultPathName, constants.Slash + route.route);
-                                        window.location.pathname = constants.Slash + route.route
+                                        redirectRoute = constants.Slash + route.route;
+                                        localStorage.setItem(constants.DefaultPathName, redirectRoute);
                                     }
                                 }
                             }
                         }
+                    }).then(() => {
+                        dispatch(actLogin(login));
                     });
-                } else {
-                    login.errorMessage = res.data.errors;
                 }
-                dispatch(actLogin(login));
             });
         }
     }

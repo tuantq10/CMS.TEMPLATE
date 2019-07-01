@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import i18n from "../../../../localization/i18n";
 import { Icon, Menu, Dropdown } from 'antd';
-import './SelectLang.scss'
+import './SelectLang.less'
 
 export const SelectLang = () => {
     const locales = ['vn', 'en'];

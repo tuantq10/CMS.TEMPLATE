@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Layout from '../components/Main';
 import LoginRoute from './LoginRoute';
 import PrivateRoute from './PrivateRoute';
-import { clearAllCache, alertMessage, buildReturnUrl } from "../utils/function";
+import { clearAllCache, alertMessage, buildReturnUrl, setLoginLocalStorage } from "../utils/function";
 import { constants } from "../constants/constants";
 import * as moment from 'moment';
 import i18n from '../localization/i18n';
@@ -34,11 +34,13 @@ class MainCheck extends Component {
                 const isSuccess = returnData && returnData.status === 200 && returnData.data && returnData.data.data;
                 if (isSuccess) {
                     const expirationDate = moment.utc(returnData.data.data.expiration).local().format(constants.DateTimeFormatFromDB);
-                    localStorage.setItem(constants.AuthenKey, returnData.data.data.token);
-                    localStorage.setItem(constants.AccessibleProperties, JSON.stringify(returnData.data.data.accessibleProperties));
-                    localStorage.setItem(constants.TokenExpiration, expirationDate);
-                    localStorage.setItem(constants.ValidTo, returnData.data.data.validTo);
-                    localStorage.setItem(constants.IsRoleAllowChangeSIC, returnData.data.data.isRoleAllowChangeSIC);
+                    setLoginLocalStorage({
+                        [`${constants.AuthenKey}`]: res.data.data.token,
+                        [`${constants.AccessibleProperties}`]: JSON.stringify(res.data.data.accessibleProperties),
+                        [`${constants.TokenExpiration}`]: expirationDate,
+                        [`${constants.ValidTo}`]: res.data.data.validTo,
+                        [`${constants.IsRoleAllowChangeSIC}`]: res.data.data.isRoleAllowChangeSIC
+                    });
                     const currentDateTime = moment().add(3, 'minutes').format(constants.DateTimeFormatFromDB);
                     interValTime = (moment(expirationDate) - moment(currentDateTime)).valueOf();
                 }
@@ -86,8 +88,7 @@ class MainCheck extends Component {
     };
 
     getDefaultPath = () => {
-        let result = '';
-        result = localStorage.getItem(constants.ReturnUrl);
+        let result = localStorage.getItem(constants.ReturnUrl);
         if (result === null || result === '')
             result = localStorage.getItem(constants.DefaultPathName);
         if (result === null || result === '') {
@@ -110,15 +111,17 @@ class MainCheck extends Component {
         const {timeOutId} = this.state;
         const timeToStart = this.setTimeOutToCallRefreshToken();
         const isLoginPage = history.location.pathname === '/login';
-        const defaultPath = (history.location.pathname === constants.Slash || isLoginPage) ? this.getDefaultPath() + this.getPathParam() : '';
-        if (defaultPath && !isLoginPage) {
+        const defaultPath = (history.location.pathname === constants.Slash || history.actions === "REPLACE") ? this.getDefaultPath() + this.getPathParam() : '';
+        if (defaultPath) {
             this.setState({defaultPath: defaultPath});
             history.push(defaultPath);
-            localStorage.removeItem(constants.ReturnUrl);
-            localStorage.removeItem(constants.ReturnUrlId);
         }
         if (!isNaN(timeToStart) && timeToStart > 0 && timeOutId === null && !isLoginPage) {
             this.createNewTimeOutAction(timeToStart);
+        }
+        if (!isLoginPage) {
+            localStorage.removeItem(constants.ReturnUrl);
+            localStorage.removeItem(constants.ReturnUrlId);
         }
     }
 

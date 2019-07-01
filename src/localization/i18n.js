@@ -7,6 +7,8 @@ import { general_en, general_vn } from './translate/General';
 import { login_en, login_vn } from "./translate/Login";
 import { menu_en, menu_vn } from "./translate/Menu";
 import { dashboard_en, dashboard_vn } from "./translate/Dashboard";
+import { serviceList_en, serviceList_vn } from "./translate/ServiceList";
+import { profile_en, profile_vn } from "./translate/Profile";
 
 i18n
     .use(Backend)
@@ -20,6 +22,8 @@ i18n
                     "login": login_en,
                     "menu": menu_en,
                     "dashboard": dashboard_en,
+                    "serviceList": serviceList_en,
+                    "profile": profile_en,
                 }
             },
             vn: {
@@ -28,6 +32,8 @@ i18n
                     "login": login_vn,
                     "menu": menu_vn,
                     "dashboard": dashboard_vn,
+                    "serviceList": serviceList_vn,
+                    "profile": profile_vn,
                 }
             }
         },
