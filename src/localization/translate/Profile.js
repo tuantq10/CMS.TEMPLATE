@@ -11,6 +11,7 @@ export const profile_en = {
     errorPasswordLength: "Minimum length of password is 8 and maximum is 100. Contains at least upper case character, lower case character, numbers, special character",
     errorNotMatch: "Confirm password not match",
     successChangePassword: "Change password success, Please login again",
+    changePasswordSuccess: "Change password success! Your session expired. Please re-login to continue",
 };
 
 export const profile_vn = {
@@ -25,6 +26,7 @@ export const profile_vn = {
     textBtn: "Đổi mật khẩu",
     errorPasswordLength: "Mật khẩu ít nhất 8 ký tự, tối đa 100 ký tự. Chứa ký tự hoa, thường, số, ký tự đặc biệt",
     errorNotMatch: "Xác nhận mật khẩu không trùng khớp",
-    successChangePassword: "Đổi mật khẩu thành công. Vui lòng đăng nhập lại"
+    successChangePassword: "Đổi mật khẩu thành công. Vui lòng đăng nhập lại",
+    changePasswordSuccess: "Đổi mật khẩu thành công! Vui lòng đăng nhập lại",
 };
 

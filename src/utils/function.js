@@ -163,7 +163,7 @@ export const validErrorCode = (code) => {
     }
 };
 
-export const buildReturnUrl = (history, url = '/login', isExpired = false) => {
+export const buildReturnUrl = (history, url = '/login', isExpired = false, withPush = true) => {
     let purePath = "";
     const pathName = history.location.pathname;
     const arrSplitPathName = pathName.split(constants.Slash);
@@ -174,7 +174,8 @@ export const buildReturnUrl = (history, url = '/login', isExpired = false) => {
     if (arrSplitPathName && arrSplitPathName.length === 3 && isExpired)
         localStorage.setItem(constants.ReturnUrlId, arrSplitPathName[2]);
     clearAllCache();
-    history.go(url);
+    if (withPush)
+        history.go(url);
 };
 
 export const removeAccent = (str) => {
@@ -350,4 +351,24 @@ export const setLoginLocalStorage = (obj) => {
         localStorage.setItem(constants.ValidTo, obj[constants.ValidTo]);
     if (obj[constants.IsRoleAllowChangeSIC])
         localStorage.setItem(constants.IsRoleAllowChangeSIC, obj[constants.IsRoleAllowChangeSIC]);
+};
+
+export const validateFormInput = (values, validateRule) => {
+    let errors = {};
+
+    (validateRule['requireds'] || []).map(x => {
+        if (!values[x] || values[x].length === 0) {
+            errors[x] = 'Is required';
+        }
+    });
+
+    (validateRule['validate'] || []).map(x => {
+        if (!errors[x.field]) {
+            let error = x.func(values[x.field], values);
+            if (error)
+                errors[x.field] = error;
+        }
+    });
+
+    return errors;
 };

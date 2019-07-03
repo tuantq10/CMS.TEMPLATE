@@ -14,7 +14,7 @@ export const actLoginRequest = (login) => {
                 "Password": login.password,
                 "gRecaptchaResponse": login.capChaValue,
             };
-            return callApi(endpoint.auth, null, data, 'POST').then(res => {
+            callApi(endpoint.auth, null, data, 'POST').then(res => {
                 validErrorCode(res.status);
                 login.isSuccess = res.status === 200;
                 if (login.isSuccess) {
@@ -44,7 +44,10 @@ export const actLoginRequest = (login) => {
                         }
                     }).then(() => {
                         dispatch(actLogin(login));
-                    });
+                    })
+                } else {
+                    login.errorMessage = res.data.errors;
+                    dispatch(actLogin(login));
                 }
             });
         }

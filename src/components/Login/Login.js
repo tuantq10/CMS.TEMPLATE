@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReCAPTCHA from "react-google-recaptcha";
 import { Form, Button, Typography } from 'antd';
-import { InputText } from "../common/Input";
+import { InputText, InputPassword } from "../common/Input";
 import { callApi } from "../../utils/apiCaller";
 import { endpoint } from "../../constants/endpoint";
 import { useSelector, useDispatch } from 'react-redux';
@@ -82,7 +82,7 @@ export const Login = () => {
             </div>
             <Form onSubmit={onHandleSubmit} className="login-form">
                 <InputText focus name="email" type="email" onChange={onHandleChange} value={formValues.email} placeholder="Email"/>
-                <InputText name="password" type="password" onChange={onHandleChange} value={formValues.password} placeholder="Password"/>
+                <InputPassword name="password" type="password" onChange={onHandleChange} value={formValues.password} placeholder="Password"/>
                 <Form.Item>
                     {siteKey !== '' && <ReCAPTCHA onChange={onCapChaHandleChange} sitekey={siteKey}/>}
                 </Form.Item>

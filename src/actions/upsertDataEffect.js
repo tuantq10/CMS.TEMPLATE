@@ -60,7 +60,7 @@ export const upsertDataEffect = (url, editId, callbackSubmitted, callbackCleared
 
         (validateRule['requireds'] || []).map(x => {
             if (!values[x] || values[x].length === 0) {
-                errors[x] = 'Is required';
+                errors[x] = t('general.isRequired');
             }
         });
 
@@ -89,7 +89,7 @@ export const upsertDataEffect = (url, editId, callbackSubmitted, callbackCleared
 
         (validateRule['validate'] || []).filter(x => x.field === name).map(x => {
             if (!errors[x.field]) {
-                var error = x.func(values[x.field], values);
+                let error = x.func(values[x.field], values);
                 if (error)
                     errors[x.field] = error;
             }

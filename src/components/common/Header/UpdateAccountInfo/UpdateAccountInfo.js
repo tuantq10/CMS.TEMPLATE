@@ -5,13 +5,15 @@ import { endpoint } from "../../../../constants/endpoint";
 import './UpdateAccountInfo.less';
 import { InputText, InputPassword } from "../../Input";
 import { callAuthApi } from "../../../../utils/apiCaller";
-import { alertMessage, detectReturnMessage, isValidComplexity } from "../../../../utils/function";
+import { alertMessage, isValidComplexity, validateFormInput, clearAllCache, buildReturnUrl } from "../../../../utils/function";
 import { useTranslation } from "react-i18next";
+import useReactRouter from 'use-react-router';
 
 export const UpdateAccountInfo = ({isSubmitButtonClick, callbackSubmitted}) => {
     const {t} = useTranslation();
     const {Text} = Typography;
     const {Panel} = Collapse;
+    const {history} = useReactRouter();
     const [isLoading, setIsLoading] = useState(false);
     const [formValues, setFormValues] = useState({});
     const [formErrors, setFormErrors] = useState({});
@@ -26,9 +28,9 @@ export const UpdateAccountInfo = ({isSubmitButtonClick, callbackSubmitted}) => {
     }, [isSubmitButtonClick]);
 
     useEffect(() => {
-        if (Object.keys(formErrors).length === 0 && isSubmitting)
+        if (Object.keys(formErrors).length === 0 && isSubmitting) {
             saveData();
-        else
+        } else
             callbackSubmitted && callbackSubmitted(false);
     }, [formErrors]);
 
@@ -40,6 +42,27 @@ export const UpdateAccountInfo = ({isSubmitButtonClick, callbackSubmitted}) => {
                 func: (val, vals) => {
                     if (val.length > 0 && (val.length < 10 || val.length > 11))
                         return t(`general.errorPhoneNumber`);
+                }
+            },
+            {
+                field: 'newPassword',
+                func: (val, vals) => {
+                    const isInputCurrentPassword = vals && vals['oldPassword'] && vals['oldPassword'].length > 0;
+                    if ((!val || val.length <= 0) && isInputCurrentPassword) {
+                        return t('general.isRequired');
+                    } else if (val && val.length > 0 && isInputCurrentPassword && !isValidComplexity(val))
+                        return t('profile.errorPasswordLength');
+                }
+            },
+            {
+                field: 'confirmPassword',
+                func: (val, vals) => {
+                    const isInputCurrentPassword = vals && vals['oldPassword'] && vals['oldPassword'].length > 0;
+                    const newPassword = vals && vals['newPassword'];
+                    if ((!val || val.length <= 0) && isInputCurrentPassword) {
+                        return t('general.isRequired');
+                    } else if (val && val.length > 0 && isInputCurrentPassword && val !== newPassword)
+                        return t('profile.errorNotMatch');
                 }
             }
         ]
@@ -55,37 +78,28 @@ export const UpdateAccountInfo = ({isSubmitButtonClick, callbackSubmitted}) => {
         setIsLoading(false);
     };
 
-    const validate = (values) => {
-        let errors = {};
-
-        (validateRule['requireds'] || []).map(x => {
-            if (!values[x] || values[x].length === 0) {
-                errors[x] = 'Is required';
-            }
-        });
-
-        (validateRule['validate'] || []).map(x => {
-            if (!errors[x.field]) {
-                var error = x.func(values[x.field], values);
-                if (error)
-                    errors[x.field] = error;
-            }
-        });
-
-        return errors;
-    };
-
     const saveData = async () => {
         setIsLoading(true);
         let isSuccess = false;
         let msg = '';
         try {
-            const result = await callAuthApi(endpoint.profile, formValues, 'PUT');
+            let formValuesBody = {...formValues};
+            if (formValuesBody && formValuesBody.oldPassword === '') {
+                const fieldsUpdatePassword = ['oldPassword', 'newPassword', 'confirmPassword'];
+                fieldsUpdatePassword.map((v, i) => {
+                    delete formValuesBody[v];
+                });
+            }
+            const result = await callAuthApi(endpoint.profile, formValuesBody, 'PUT');
             if (result.status === 200) {
+                if (formValuesBody.newPassword) {
+                    msg = t('profile.changePasswordSuccess');
+                    buildReturnUrl(history, '/login', false, false);
+                }
                 isSuccess = true;
                 callbackSubmitted && callbackSubmitted(true);
             } else {
-                msg = detectReturnMessage(result.data.errors);
+                msg = result.data.errors;
             }
         } catch (error) {
         }
@@ -99,7 +113,7 @@ export const UpdateAccountInfo = ({isSubmitButtonClick, callbackSubmitted}) => {
     };
 
     const handleSubmit = (evt) => {
-        setFormErrors(validate(formValues));
+        setFormErrors(validateFormInput(formValues, validateRule));
         setIsSubmitting(true);
         evt && evt.preventDefault();
     };
@@ -152,7 +166,7 @@ export const UpdateAccountInfo = ({isSubmitButtonClick, callbackSubmitted}) => {
                                 <Text strong>Current Password</Text>
                             </Col>
                             <Col span={17}>
-                                <InputPassword value={formValues.currentPassword} onChange={handleChangeVal} error={formErrors.fullNacurrentPasswordme} name="currentPassword" onSubmit={handleSubmit}/>
+                                <InputPassword value={formValues.oldPassword} onChange={handleChangeVal} error={formErrors.oldPassword} name="oldPassword" onSubmit={handleSubmit}/>
                             </Col>
                         </Row>
                         <Row gutter={48}>

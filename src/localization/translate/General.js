@@ -51,6 +51,8 @@ export const general_en = {
     ddlServicePlaceHolder: "Choose service",
     errorPhoneNumber: "Phone number must at least 10 characters, max 11 characters",
     permissionError: "You do not have permission",
+    isRequired: "Is required",
+    errorTokenExpired: "Your token expired! You will be direct to login page after 5s...",
 };
 
 export const general_vn = {
@@ -106,4 +108,6 @@ export const general_vn = {
     ddlServicePlaceHolder: "Chọn dịch vụ",
     errorPhoneNumber: "Số điện thoại không hợp lệ",
     permissionError: "You do not have permission",
+    isRequired: "Is required",
+    errorTokenExpired: "Your token expired! You will be direct to login page after 5s...",
 };

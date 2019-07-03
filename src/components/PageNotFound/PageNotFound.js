@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'antd';
 import notFound from '../../assets/images/noFound.svg';
 import useReactRouter from 'use-react-router';
+import { constants } from "../../constants/constants";
+import { clearAllCache } from "../../utils/function";
 import './PageNotFound.less';
 
 export const PageNotFound = () => {
+    const [defaultPath, setDefaultPath] = useState(localStorage.getItem(constants.DefaultPathName) || '/');
     const {history} = useReactRouter();
 
     const handleClick = (evt) => {
         evt && evt.preventDefault();
-        history.push('/');
+        if (defaultPath === '/login')
+            clearAllCache();
+        defaultPath === '/' ? history.go(defaultPath) : history.push(defaultPath);
     };
 
     return (
