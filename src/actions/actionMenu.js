@@ -6,13 +6,15 @@ import { constants } from "../constants/constants";
 
 export function loadMenuRequest() {
     return (dispatch) => {
-        return callAuthApi(endpoint.accessibleMenu).then(res => {
-            validErrorCode(res.status);
-            if (res.status === 200 && res.data && res.data.data) {
-                let {menus, menusWithPermission} = getMenu(res.data.data);
-                dispatch(loadMenu(menus, menusWithPermission));
-            }
-        });
+        // return callAuthApi(endpoint.accessibleMenu).then(res => {
+        //     validErrorCode(res.status);
+        //     if (res.status === 200 && res.data && res.data.data) {
+        //         let {menus, menusWithPermission} = getMenu(res.data.data);
+        //         dispatch(loadMenu(menus, menusWithPermission));
+        //     }
+        // });
+        let {menus, menusWithPermission} = getMenu(constants.routes);
+        dispatch(loadMenu(menus, menusWithPermission));
     }
 }
 
@@ -86,4 +88,23 @@ function getMenu(menus) {
         });
     }
     return {menus: result, menusWithPermission: menus};
+}
+
+export function actGetAllMenuRequest() {
+    return dispatch => {
+        return callAuthApi(endpoint.allMenu).then(res => {
+            validErrorCode(res.status);
+            if (res.status === 200 && res.data && res.data.data) {
+                const listMenu = parseMenuString(res.data.data);
+                return dispatch(actGetAllMenuResponse(listMenu));
+            }
+        });
+    }
+}
+
+function actGetAllMenuResponse(allMenus) {
+    return {
+        type: Types.MENU_ALL,
+        allMenus
+    }
 }

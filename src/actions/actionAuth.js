@@ -10,29 +10,30 @@ export const actLoginRequest = (login) => {
         if (login) {
             let redirectRoute = '';
             const data = {
-                "Email": login.email,
+                "Username": login.email,
                 "Password": login.password,
-                "gRecaptchaResponse": login.capChaValue,
+                // "gRecaptchaResponse": login.capChaValue,
             };
             callApi(endpoint.auth, null, data, 'POST').then(res => {
                 validErrorCode(res.status);
                 login.isSuccess = res.status === 200;
+                let token = '';
                 if (login.isSuccess) {
-                    setLoginLocalStorage({
-                        [`${constants.AuthenKey}`]: res.data.data.token,
-                        [`${constants.Email}`]: login.email,
-                        [`${constants.CurrentUserId}`]: res.data.data.userId,
-                        [`${constants.CurrentUserName}`]: res.data.data.fullName,
-                        [`${constants.AccessibleProperties}`]: JSON.stringify(res.data.data.accessibleProperties),
-                        [`${constants.TokenExpiration}`]: moment.utc(res.data.data.expiration).local().format(constants.DateTimeFormatFromDB),
-                        [`${constants.ValidTo}`]: res.data.data.validTo,
-                        [`${constants.IsRoleAllowChangeSIC}`]: res.data.data.isRoleAllowChangeSIC
-                    });
-                    callAuthApi(endpoint.accessibleMenu).then(res => {
+                    localStorage.setItem(constants.AuthenKey, res.data.token);
+                    callAuthApi(endpoint.profile).then(res => {
                         if (res.status === 200) {
                             const data = res.data.data;
-                            if (data && data[0]) {
-                                const firstRoute = data[0];
+                            setLoginLocalStorage({
+                                [`${constants.Email}`]: login.email,
+                                [`${constants.CurrentUserId}`]: data.id,
+                                [`${constants.CurrentUserName}`]: data.username,
+                                // [`${constants.AccessibleProperties}`]: JSON.stringify(res.data.data.accessibleProperties),
+                                // [`${constants.TokenExpiration}`]: moment.utc(res.data.data.expiration).local().format(constants.DateTimeFormatFromDB),
+                                // [`${constants.ValidTo}`]: res.data.data.validTo,
+                                // [`${constants.IsRoleAllowChangeSIC}`]: res.data.data.isRoleAllowChangeSIC
+                            });
+                            if (constants.routes) {
+                                const firstRoute = constants.routes[0];
                                 if (firstRoute) {
                                     const route = firstRoute.permissions && firstRoute.permissions.length > 0 ? firstRoute : firstRoute.routes[0];
                                     if (route) {

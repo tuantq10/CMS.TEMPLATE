@@ -49,7 +49,7 @@ export const Login = () => {
     };
 
     const resetCapCha = () => {
-        window.grecaptcha.reset();
+        // window.grecaptcha.reset();
         setFormValues({...formValues, capChaValue: ''});
     };
 
@@ -58,7 +58,7 @@ export const Login = () => {
     };
 
     useEffect(() => {
-        fetchSiteKeyData();
+        // fetchSiteKeyData();
     }, []);
 
     useEffect(() => {
@@ -81,13 +81,17 @@ export const Login = () => {
                 <img src={logo} alt="logo"/>
             </div>
             <Form onSubmit={onHandleSubmit} className="login-form">
-                <InputText focus name="email" type="email" onChange={onHandleChange} value={formValues.email} placeholder="Email"/>
+                {/*<InputText focus name="email" type="email" onChange={onHandleChange} value={formValues.email} placeholder="Email"/>*/}
+                <InputText focus name="email" onChange={onHandleChange} value={formValues.email} placeholder="Email"/>
                 <InputPassword name="password" type="password" onChange={onHandleChange} value={formValues.password} placeholder="Password"/>
                 <Form.Item>
                     {siteKey !== '' && <ReCAPTCHA onChange={onCapChaHandleChange} sitekey={siteKey}/>}
                 </Form.Item>
                 <Form.Item>
-                    <Button loading={isLoading} disabled={capChaValue === ''} type="primary" htmlType="submit" className="login-form-button">
+                    {/*<Button loading={isLoading} disabled={capChaValue === ''} type="primary" htmlType="submit" className="login-form-button">*/}
+                    {/*    Log in*/}
+                    {/*</Button>*/}
+                    <Button loading={isLoading} type="primary" htmlType="submit" className="login-form-button">
                         Log in
                     </Button>
                 </Form.Item>

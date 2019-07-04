@@ -1,13 +1,15 @@
 export const endpoint = {
     //auth
-    auth: 'auth/token',
-    profile: 'auth/profiles',
+    // auth: 'auth/token',
+    auth: 'user/login',
+    profile: 'user/profile',
     logout: "auth/logout",
     capCha: "auth/recaptcha",
     refreshToken: "auth/refresh-token",
 
     //menu
     accessibleMenu: 'menus/accessible',
+    allMenu: 'menus/all',
 
     service: 'services',
     chainsNewType: 'chains',
@@ -18,6 +20,7 @@ export const endpoint = {
     propertiesDdlByChainOrLocation: 'properties/ddl-by-chain-location',
     serviceCategory: 'categories',
     property: 'properties',
+    role: 'roles',
 
     ddl: {
         sic: "ddl/sic",

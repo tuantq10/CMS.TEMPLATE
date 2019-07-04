@@ -36,4 +36,295 @@ export const constants = {
         Delete: 4
     },
     ActionGridItemWidth: 49,
+    routes : [
+        {
+            "route": "dashboard",
+            "permissions": [
+                1
+            ],
+            "routes": []
+        },
+        {
+            "route": "reports",
+            "permissions": [],
+            "routes": [
+                {
+                    "route": "report-mice-booking-by-status",
+                    "permissions": [
+                        1
+                    ],
+                    "routes": []
+                },
+                {
+                    "route": "report-mice-revenue-by-component",
+                    "permissions": [
+                        1
+                    ],
+                    "routes": []
+                },
+                {
+                    "route": "report-booking-and-revenue-by-sales-man",
+                    "permissions": [
+                        1
+                    ],
+                    "routes": []
+                },
+                {
+                    "route": "report-booking-and-revenue-by-industry",
+                    "permissions": [
+                        1
+                    ],
+                    "routes": []
+                },
+                {
+                    "route": "guest-room-type-calendar",
+                    "permissions": [
+                        1
+                    ],
+                    "routes": []
+                }
+            ]
+        },
+        {
+            "route": "sales-management",
+            "permissions": [],
+            "routes": [
+                {
+                    "route": "venue-calendar",
+                    "permissions": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ],
+                    "routes": []
+                },
+                {
+                    "route": "booking-list-management",
+                    "permissions": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ],
+                    "routes": []
+                },
+                {
+                    "route": "create-booking",
+                    "permissions": [
+                        2
+                    ],
+                    "routes": []
+                }
+            ]
+        },
+        {
+            "route": "service-management",
+            "permissions": [],
+            "routes": [
+                {
+                    "route": "service-list",
+                    "permissions": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ],
+                    "routes": []
+                },
+                {
+                    "route": "create-service",
+                    "permissions": [
+                        2
+                    ],
+                    "routes": []
+                }
+            ]
+        },
+        {
+            "route": "account-management",
+            "permissions": [],
+            "routes": [
+                {
+                    "route": "account-list",
+                    "permissions": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ],
+                    "routes": []
+                },
+                {
+                    "route": "create-account",
+                    "permissions": [
+                        2
+                    ],
+                    "routes": []
+                }
+            ]
+        },
+        {
+            "route": "settings",
+            "permissions": [],
+            "routes": [
+                {
+                    "route": "property-list",
+                    "permissions": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ],
+                    "routes": []
+                },
+                {
+                    "route": "venue-list",
+                    "permissions": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ],
+                    "routes": []
+                },
+                {
+                    "route": "highlight",
+                    "permissions": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ],
+                    "routes": []
+                },
+                {
+                    "route": "maintenance",
+                    "permissions": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ],
+                    "routes": []
+                },
+                {
+                    "route": "service-category-list",
+                    "permissions": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ],
+                    "routes": []
+                },
+                {
+                    "route": "industry-list",
+                    "permissions": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ],
+                    "routes": []
+                },
+                {
+                    "route": "area-list",
+                    "permissions": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ],
+                    "routes": []
+                },
+                {
+                    "route": "chain-list",
+                    "permissions": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ],
+                    "routes": []
+                },
+                {
+                    "route": "venue-setup-list",
+                    "permissions": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ],
+                    "routes": []
+                },
+                {
+                    "route": "event-type",
+                    "permissions": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ],
+                    "routes": []
+                },
+                {
+                    "route": "contact-role",
+                    "permissions": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ],
+                    "routes": []
+                },
+                {
+                    "route": "sales-area",
+                    "permissions": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ],
+                    "routes": []
+                },
+                {
+                    "route": "lead-source",
+                    "permissions": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ],
+                    "routes": []
+                }
+            ]
+        },
+        {
+            "route": "user-management",
+            "permissions": [],
+            "routes": [
+                {
+                    "route": "user-list",
+                    "permissions": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ],
+                    "routes": []
+                },
+                {
+                    "route": "role-list",
+                    "permissions": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ],
+                    "routes": []
+                }
+            ]
+        }
+    ],
 };
