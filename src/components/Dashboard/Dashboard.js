@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { useTranslation } from "react-i18next";
 import { Button } from "antd";
 import useReactRouter from 'use-react-router';
-
+import { UploadFileChuck } from '../../components/common/UploadFileChuck';
 export const Dashboard = () => {
     const {t} = useTranslation();
     const {history} = useReactRouter();
@@ -24,6 +24,7 @@ export const Dashboard = () => {
                 <br/>
                 <Button type="primary" onClick={(e) => onHandleClick('/service-list')}>Push To Service List</Button>
                 <br/>
+                <UploadFileChuck></UploadFileChuck>
                 <br/>
                 {t('general.errorMessageIsUse')}
                 <br/>

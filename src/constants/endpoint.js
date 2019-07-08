@@ -22,6 +22,10 @@ export const endpoint = {
     property: 'properties',
     role: 'roles',
 
+    //uoloadFile
+    createSession:"uploadfile/create",
+    uploadFileChuck:"uploadfile/upload/session/",
+
     ddl: {
         sic: "ddl/sic",
         sicMultiSelect: "ddl/sic-multiselect",
