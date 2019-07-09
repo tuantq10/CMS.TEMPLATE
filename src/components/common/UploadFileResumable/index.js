@@ -1,5 +1,6 @@
 import React from "react";
 import Resumablejs from "resumablejs";
+import './index.less';
 
 export default class UploadFileResumable extends React.Component {
     constructor(props) {
@@ -50,7 +51,8 @@ export default class UploadFileResumable extends React.Component {
             chunkSizeParameterName: this.props.chunkSizeParameterName,
             currentChunkSizeParameterName: this.props.currentChunkSizeParameterName,
             fileNameParameterName: this.props.fileNameParameterName,
-            totalSizeParameterName: this.props.totalSizeParameterName
+            totalSizeParameterName: this.props.totalSizeParameterName,
+            dropTargetID: this.props.dropTargetID
         });
 
         if (typeof this.props.maxFilesErrorCallback === "function") {
@@ -145,44 +147,19 @@ export default class UploadFileResumable extends React.Component {
     createFileList = () => {
 
         let markup = this.state.fileList.files.map((file, index) => {
-
+            let linkDownload = this.props.linkDownload;
+            console.log("file",file);
+            let sessionId = file.sessionId;
+            console.log(sessionId);
             let uniqID = this.props.uploaderID + '-' + index;
             let originFile = file.file;
-            let media = '';
-
-            if (file.file.type.indexOf('video') > -1) {
-                media = <label className="video">{originFile.name}</label>;
-                return <li className="thumbnail" key={uniqID}>
-                    <label id={"media_" + uniqID}>{media}</label>
-                    <a onClick={(event) => this.removeFile(event, file, index)} href="#">[X]</a>
-                </li>;
-            }
-            else if (file.file.type.indexOf('image') > -1) if (this.props.tmpDir !== "") {
-                let src = this.props.tmpDir + file.fileName;
-                media = <img className="image" width="80" src={src} alt=""/>;
-                return <li className="thumbnail" key={uniqID}>
-                    <label id={"media_" + uniqID}>{media}</label>
-                    <a onClick={(event) => this.removeFile(event, file, index)} href="#">[X]</a>
-                </li>;
-
-            } else {
-                let fileReader = new FileReader();
-                fileReader.readAsDataURL(originFile);
-                fileReader.onload = (event) => {
-                    media = '<img class="image" width="80" src="' + event.target.result + '"/>';
-                    document.querySelector("#media_" + uniqID).innerHTML = media;
-                };
-                return <li className="thumbnail" key={uniqID}>
-                    <label id={"media_" + uniqID}/>
-                    <a onClick={(event) => this.removeFile(event, file, index)} href="#">[X]</a>
-                </li>;
-            } else {
-                media = <label className="document">{originFile.name}</label>;
-                return <li className="thumbnail" key={uniqID}>
-                    <label id={"media_" + uniqID}>{media}</label>
-                    <a onClick={(event) => this.removeFile(event, file, index)} href="#">[X]</a>
-                </li>;
-            }
+            let href = linkDownload ? `${linkDownload}/${sessionId}` : "";
+            console.log(href);
+            let media = <a  href={href}>{originFile.name}</a>;
+            return <li className="thumbnail" key={uniqID}>
+                <label id={"media_" + uniqID}>{media}</label>
+                <a onClick={(event) => this.removeFile(event, file, index)} href="#">[X]</a>
+            </li>;
         });
 
         return <ul id={"items-" + this.props.uploaderID}>{markup}</ul>;
@@ -326,9 +303,6 @@ UploadFileResumable.defaultProps = {
     disableDragAndDrop: false,
     fileNameServer: "",
     tmpDir: "",
-    chunkSize: 1024 * 1024,
-    simultaneousUploads: 1,
-    fileParameterName: 'file',
     generateUniqueIdentifier: null,
     maxFilesErrorCallback: null,
     cancelButton: false,
@@ -338,9 +312,8 @@ UploadFileResumable.defaultProps = {
     previousText: "",
     headerObject : {},
     withCredentials: false,
-    forceChunkSize: false,
     chunkSize: 1 * 1024 * 1024,
-    forceChunkSize: true,
+    forceChunkSize: false,
     simultaneousUploads: 1,
     uploadMethod: 'PUT',
     testChunks: false,
@@ -350,5 +323,6 @@ UploadFileResumable.defaultProps = {
     chunkSizeParameterName: 'chunkSize',
     currentChunkSizeParameterName: 'chunkSize',
     fileNameParameterName: 'fileName',
-    totalSizeParameterName: 'totalSize'
+    totalSizeParameterName: 'totalSize',
+    linkDownload: undefined
 };

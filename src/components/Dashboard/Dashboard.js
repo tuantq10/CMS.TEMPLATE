@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "antd";
 import useReactRouter from 'use-react-router';
 import { UploadFileChuck } from '../../components/common/UploadFileChuck';
+import { endpoint } from '../../constants/endpoint';
 export const Dashboard = () => {
     const {t} = useTranslation();
     const {history} = useReactRouter();
@@ -24,7 +25,14 @@ export const Dashboard = () => {
                 <br/>
                 <Button type="primary" onClick={(e) => onHandleClick('/service-list')}>Push To Service List</Button>
                 <br/>
-                <UploadFileChuck></UploadFileChuck>
+                    <UploadFileChuck 
+                        target={process.env.REACT_APP_API_URL+endpoint.uploadFileChuck} 
+                        linkDownload={process.env.REACT_APP_API_URL+endpoint.donwloadFileChuck}
+                        endpointCallCreateSession={endpoint.createSession}  
+                        dropTargetID="drop-upload-chuck" 
+                        uploaderID="upload-chuck">
+                    </UploadFileChuck>
+        
                 <br/>
                 {t('general.errorMessageIsUse')}
                 <br/>

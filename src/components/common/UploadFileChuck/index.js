@@ -1,32 +1,25 @@
 import React, { Component, Fragment, useEffect, useState } from 'react';
 import UploadFileResumable from '../UploadFileResumable'
-import { endpoint } from '../../../constants/endpoint';
 import { callApi } from "../../../utils/apiCaller";
-import './index.less';
-export const UploadFileChuck = (host,uploaderID,dropTargetID) => {
-    const [sessionId, setSessionId] = useState("");
+export const UploadFileChuck = ({target,endpointCallCreateSession,uploaderID,linkDownload,dropTargetID}) => {
     const createSession = async (file, resumable) => {
-        console.log(file);
-        let result = await callApi(endpoint.createSession,{},{
-          UserId: 11,
+        let result = await callApi(endpointCallCreateSession,{},{
           ChunkSize: 1*1024*1024,
           TotalSize: file.size,
           FileName: file.fileName
         },"POST");
        if(result && result.status == 200)  {
-          resumable.opts.target =  resumable.opts.target + result.data.sessionId;
-          console.log(resumable.opts);
-          console.log(result);
-          setSessionId(result.data.sessionId);
+          resumable.opts.target =  target + result.data.sessionId;
+          file.sessionId = result.data.sessionId;
           resumable.upload();
        }
     }
     return (
         <Fragment>
-            <p>You can add other inputs, selects or stuff right here to complete a form.</p>
           <UploadFileResumable
-            uploaderID="image-upload"
-            service={process.env.REACT_APP_API_URL+endpoint.uploadFileChuck}
+            uploaderID={uploaderID}
+            dropTargetID={dropTargetID}
+            service={target}
             onFileSuccess={(file, message) => {
               console.log(file, message);
             }}
@@ -38,7 +31,6 @@ export const UploadFileChuck = (host,uploaderID,dropTargetID) => {
             forceChunkSize={true}
             simultaneousUploads={1}
             uploadMethod="Put"
-            testChunks={false}
             throttleProgressCallbacks={1}
             fileParameterName="file"
             chunkNumberParameterName="chunkNumber"
@@ -46,6 +38,7 @@ export const UploadFileChuck = (host,uploaderID,dropTargetID) => {
             currentChunkSizeParameterName="chunkSize"
             fileNameParameterName="fileName"
             totalSizeParameterName="totalSize"
+            linkDownload={linkDownload}
           />
         </Fragment>
     );
