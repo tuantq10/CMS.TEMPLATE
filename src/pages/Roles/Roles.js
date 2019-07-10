@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import GridDataPage from '../../commons/components/GridDataPage/GridDataPage';
 import { useTranslation } from "react-i18next";
-import { formatDateTime, validPermission } from "../../commons/utils/function";
+import { formatUTCDateTime, validPermission } from "../../commons/utils/function";
 import { constants } from "../../commons/constants/constants";
 import { endpoint } from "../../commons/constants/endpoint";
 import { UpsertRoles } from "./UpsertRoles";
@@ -47,7 +47,7 @@ export const Roles = () => {
                         title: 'Created Date',
                         dataIndex: 'createdDate',
                         key: '1',
-                        render: text => <WrapText text={formatDateTime(text)}/>,
+                        render: text => <WrapText text={formatUTCDateTime(text)}/>,
                     }
                 ]}
             />}
