@@ -1,8 +1,9 @@
 import React, { Component, Fragment, useEffect, useState } from 'react';
 import UploadFileResumable from '../UploadFileResumable'
 import { callApi } from "../../../utils/apiCaller";
-export const UploadFileChuck = ({target,endpointCallCreateSession,uploaderID,linkDownload,dropTargetID}) => {
-    const createSession = async (file, resumable) => {
+export const UploadFileChuck = ({target,endpointCallCreateSession,endpointUploadAzure,isUploadAzure,uploaderID,linkDownload,dropTargetID}) => {
+     const [sessionId, setSessionId] = useState('');
+     const createSession = async (file, resumable) => {
         let result = await callApi(endpointCallCreateSession,{},{
           ChunkSize: 1*1024*1024,
           TotalSize: file.size,
@@ -11,8 +12,17 @@ export const UploadFileChuck = ({target,endpointCallCreateSession,uploaderID,lin
        if(result && result.status == 200)  {
           resumable.opts.target =  target + result.data.sessionId;
           file.sessionId = result.data.sessionId;
+          setSessionId(result.data.sessionId);
           resumable.upload();
        }
+    }
+    const onCallSuccess = async (file) => {
+      if(endpointUploadAzure && isUploadAzure)
+      {
+          await callApi(endpointUploadAzure,{},{
+            sessionId: sessionId
+          },"POST");
+      }
     }
     return (
         <Fragment>
@@ -20,11 +30,10 @@ export const UploadFileChuck = ({target,endpointCallCreateSession,uploaderID,lin
             uploaderID={uploaderID}
             dropTargetID={dropTargetID}
             service={target}
-            onFileSuccess={(file, message) => {
-              console.log(file, message);
+            onUploadCompleted={(data) => {
+              onCallSuccess(data);
             }}
             onFileAdded={(file, resumable) => {
-              console.log(resumable);
               createSession(file,resumable);
             }}
             chunkSize={1 * 1024 * 1024}

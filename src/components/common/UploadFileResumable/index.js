@@ -122,6 +122,9 @@ export default class UploadFileResumable extends React.Component {
 
         });
 
+        ResumableField.on('complete', () => {
+            this.props.onUploadCompleted(this);
+        });
         ResumableField.on('fileError', (file, errorCount) => {
             this.props.onUploadErrorCallback(file, errorCount);
         });
@@ -284,6 +287,9 @@ UploadFileResumable.defaultProps = {
     showFileList: true,
     onUploadErrorCallback: (file, errorCount) => {
         console.log('error', file, errorCount);
+    },
+    onUploadCompleted : (data) => {
+        console.log('complete',data);
     },
     onFileRemoved: function (file) {
         return file;

@@ -29,6 +29,8 @@ export const Dashboard = () => {
                         target={process.env.REACT_APP_API_URL+endpoint.uploadFileChuck} 
                         linkDownload={process.env.REACT_APP_API_URL+endpoint.donwloadFileChuck}
                         endpointCallCreateSession={endpoint.createSession}  
+                        endpointUploadAzure={endpoint.uploadFileAzure}
+                        isUploadAzure={true}
                         dropTargetID="drop-upload-chuck" 
                         uploaderID="upload-chuck">
                     </UploadFileChuck>
