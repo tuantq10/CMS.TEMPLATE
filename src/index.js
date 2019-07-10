@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import MainCheck from './components/MainCheck';
+import MainCheck from './pages/MainCheck';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { I18nextProvider } from 'react-i18next';
-import i18n from './localization/i18n';
+import i18n from './commons/localization/i18n';
 import { Provider } from 'react-redux';
-import store from './store/index';
+import store from './services/store/index';
 //lib
 import 'toastr/toastr';
 //css
