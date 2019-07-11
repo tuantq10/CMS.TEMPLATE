@@ -26,7 +26,8 @@ export const endpoint = {
     createSession:"uploadfile/create",
     uploadFileChuck:"uploadfile/upload/session/",
     donwloadFileChuck:"uploadfile/download",
-    uploadFileAzure:"uploadfile/uploadAzure",
+    uploadFileChuckAzure:"uploadfile/uploadazure/session/",
+    uploadFileAzureCompleted:"uploadfile/uploadAzure/complete",
 
     ddl: {
         sic: "ddl/sic",

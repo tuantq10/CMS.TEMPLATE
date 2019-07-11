@@ -1,7 +1,7 @@
 import React, { Component, Fragment, useEffect, useState } from 'react';
 import UploadFileResumable from '../UploadFileResumable'
 import { callApi } from "../../../utils/apiCaller";
-export const UploadFileChuck = ({target,endpointCallCreateSession,endpointUploadAzure,isUploadAzure,uploaderID,linkDownload,dropTargetID}) => {
+export const UploadFileChuck = ({target,endpointCallCreateSession,endpointUploadAzureCompleted,isUploadAzure,uploaderID,linkDownload,dropTargetID}) => {
      const [sessionId, setSessionId] = useState('');
      const createSession = async (file, resumable) => {
         let result = await callApi(endpointCallCreateSession,{},{
@@ -17,9 +17,9 @@ export const UploadFileChuck = ({target,endpointCallCreateSession,endpointUpload
        }
     }
     const onCallSuccess = async (file) => {
-      if(endpointUploadAzure && isUploadAzure)
+      if(endpointUploadAzureCompleted && isUploadAzure)
       {
-          await callApi(endpointUploadAzure,{},{
+          await callApi(endpointUploadAzureCompleted,{},{
             sessionId: sessionId
           },"POST");
       }

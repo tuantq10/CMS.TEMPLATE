@@ -26,10 +26,10 @@ export const Dashboard = () => {
                 <Button type="primary" onClick={(e) => onHandleClick('/service-list')}>Push To Service List</Button>
                 <br/>
                     <UploadFileChuck 
-                        target={process.env.REACT_APP_API_URL+endpoint.uploadFileChuck} 
+                        target={process.env.REACT_APP_API_URL+endpoint.uploadFileChuckAzure} 
                         linkDownload={process.env.REACT_APP_API_URL+endpoint.donwloadFileChuck}
                         endpointCallCreateSession={endpoint.createSession}  
-                        endpointUploadAzure={endpoint.uploadFileAzure}
+                        endpointUploadAzureCompleted={endpoint.uploadFileAzureCompleted}
                         isUploadAzure={true}
                         dropTargetID="drop-upload-chuck" 
                         uploaderID="upload-chuck">
