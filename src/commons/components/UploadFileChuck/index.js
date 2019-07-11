@@ -1,11 +1,11 @@
 import React, { Component, Fragment, useEffect, useState } from 'react';
 import UploadFileResumable from '../UploadFileResumable'
 import { callApi } from "../../utils/apiCaller";
-export const UploadFileChuck = ({target,endpointCallCreateSession,endpointUploadAzureCompleted,isUploadAzure,uploaderID,linkDownload,dropTargetID}) => {
+export const UploadFileChuck = ({target,endpointCallCreateSession,endpointUploadAzureCompleted,isUploadAzure,uploaderID,linkDownload,dropTargetID,chunkSize}) => {
      const [sessionId, setSessionId] = useState('');
      const createSession = async (file, resumable) => {
         let result = await callApi(endpointCallCreateSession,{},{
-          ChunkSize: 1*1024*1024,
+          ChunkSize: chunkSize,
           TotalSize: file.size,
           FileName: file.fileName
         },"POST");
@@ -36,7 +36,7 @@ export const UploadFileChuck = ({target,endpointCallCreateSession,endpointUpload
             onFileAdded={(file, resumable) => {
               createSession(file,resumable);
             }}
-            chunkSize={1 * 1024 * 1024}
+            chunkSize={chunkSize}
             forceChunkSize={true}
             simultaneousUploads={1}
             uploadMethod="Put"

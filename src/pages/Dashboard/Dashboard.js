@@ -33,6 +33,7 @@ export const Dashboard = () => {
                         endpointCallCreateSession={endpoint.createSession}  
                         endpointUploadAzureCompleted={endpoint.uploadFileAzureCompleted}
                         isUploadAzure={true}
+                        chunkSize={1*1024*1024}
                         dropTargetID="drop-upload-chuck" 
                         uploaderID="upload-chuck">
                     </UploadFileChuck>
