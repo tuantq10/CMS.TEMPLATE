@@ -4,7 +4,8 @@ import { Button } from "antd";
 import useReactRouter from 'use-react-router';
 import { buildMenuFromSimpleToComplex } from "../../commons/utils/function";
 import { routes } from "../../commons/route/route";
-
+import { UploadFileChuck } from '../../commons/components/UploadFileChuck';
+import { endpoint } from "../../commons/constants/endpoint";
 export const Dashboard = () => {
     const {t} = useTranslation();
     const {history} = useReactRouter();
@@ -26,6 +27,16 @@ export const Dashboard = () => {
                 <br/>
                 <Button type="primary" onClick={(e) => onHandleClick('/service-list')}>Push To Service List</Button>
                 <br/>
+                    <UploadFileChuck 
+                        target={process.env.REACT_APP_API_URL+endpoint.uploadFileChuckAzure} 
+                        linkDownload={process.env.REACT_APP_API_URL+endpoint.donwloadFileChuck}
+                        endpointCallCreateSession={endpoint.createSession}  
+                        endpointUploadAzureCompleted={endpoint.uploadFileAzureCompleted}
+                        isUploadAzure={true}
+                        dropTargetID="drop-upload-chuck" 
+                        uploaderID="upload-chuck">
+                    </UploadFileChuck>
+        
                 <br/>
                 <Button type="primary" onClick={(e) => onHandleClick('/roles')}>Push To Role List</Button>
                 <br/>

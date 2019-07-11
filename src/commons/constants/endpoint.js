@@ -20,6 +20,13 @@ export const endpoint = {
     property: 'properties',
     role: 'role',
 
+    //uoloadFile
+    createSession:"uploadfile/create",
+    uploadFileChuck:"uploadfile/upload/session/",
+    donwloadFileChuck:"uploadfile/download",
+    uploadFileChuckAzure:"uploadfile/uploadazure/session/",
+    uploadFileAzureCompleted:"uploadfile/uploadAzure/complete",
+
     ddl: {
         sic: "ddl/sic",
         sicMultiSelect: "ddl/sic-multiselect",
