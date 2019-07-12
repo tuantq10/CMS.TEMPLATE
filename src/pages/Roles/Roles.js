@@ -14,7 +14,7 @@ export const Roles = () => {
     const langPrefix = 'roles';
     const dispatch = useDispatch();
     const menusState = useSelector(state => state.reducerMenu);
-    const [allMenus, setAllMenus] = useState(null);
+    const [allMenus, setAllMenus] = useState([]);
 
     const {t} = useTranslation();
 
@@ -50,7 +50,7 @@ export const Roles = () => {
                 langPrefix={langPrefix}
                 sortColumnMapping={sortColumnMapping}
                 UpsertPopup={UpsertRoles}
-                upsertPopupWidth={800}
+                upsertPopupWidth={850}
                 upsertExtraParams={{allMenusComponents: allMenus}}
                 tableColumns={[
                     {

@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import { LoadingPanel, SwitchCustom, UpsertXBy } from "../../commons/components/CustomComponents/CustomComponents";
 import { Col, Form, Row } from "antd";
-import { DatePicker, InputNum, InputNumOnly, InputPassword, InputText } from "../../commons/components/Input";
+import { InputNumOnly, InputPassword, InputText } from "../../commons/components/Input";
 import { upsertDataEffect } from "../../services/actions/upsertDataEffect";
 import { endpoint } from "../../commons/constants/endpoint";
 import { Typography } from "antd";

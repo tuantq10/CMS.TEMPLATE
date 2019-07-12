@@ -12,6 +12,7 @@ import useReactRouter from 'use-react-router';
 import './Login.less';
 
 export const Login = () => {
+    let captcha;
     const {t} = useTranslation();
     const {history} = useReactRouter();
     const {Title} = Typography;
@@ -38,8 +39,8 @@ export const Login = () => {
     };
 
     const resetCapCha = () => {
-        window.grecaptcha.reset();
-        setFormValues({...formValues, capChaValue: ''});
+        captcha.reset();
+        setCapChaValue('');
         setDisableLogin(true)
     };
 
@@ -54,9 +55,11 @@ export const Login = () => {
 
     useEffect(() => {
         const defaultPath = login.isSuccess ? localStorage.getItem(constants.DefaultPathName) : '';
-        if (login && !login.isSuccess && login.errorMessage) {
+        if (login && !login.isSuccess) {
             setIsLoading(false);
-            alertMessage(`${t('general.error')}`, login.errorMessage, true);
+            setDisableLogin(false);
+            if (login.errorMessage)
+                alertMessage(`${t('general.error')}`, login.errorMessage, true);
             resetCapCha();
         } else if (login && login.isSuccess && defaultPath) {
             reDirect(defaultPath);
@@ -73,7 +76,9 @@ export const Login = () => {
                 <InputText focus name="username" onChange={onHandleChange} value={formValues.username} placeholder="Email"/>
                 <InputPassword name="password" type="password" onChange={onHandleChange} value={formValues.password} placeholder="Password"/>
                 <Form.Item>
-                    {siteKey !== '' && <ReCAPTCHA onChange={onCapChaHandleChange} sitekey={siteKey}/>}
+                    {siteKey !== '' && <ReCAPTCHA onChange={onCapChaHandleChange} sitekey={siteKey} ref={el => {
+                        captcha = el;
+                    }}/>}
                 </Form.Item>
                 <Form.Item>
                     <Button loading={isLoading} disabled={disableLogin} type="primary" htmlType="submit" className="login-form-button">

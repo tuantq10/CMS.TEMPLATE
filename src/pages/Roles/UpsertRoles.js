@@ -12,7 +12,6 @@ import './Roles.less';
 export const UpsertRoles = ({id, isSubmitButtonClick, isClearButtonClick, callbackSubmitted, callbackCleared, langPrefix, allMenusComponents}) => {
     const {t} = useTranslation();
     const {Text} = Typography;
-    const [allMenus, setAllMenus] = useState(allMenusComponents);
     const [permissionRoles, setPermissionRoles] = useState([]);
 
     const validateRule = {
@@ -57,8 +56,7 @@ export const UpsertRoles = ({id, isSubmitButtonClick, isClearButtonClick, callba
                                    onSubmit={handleSubmitFrm}/>
                     </Col>
                 </Row>
-                {allMenus.length > 0 && <RolesPermissions data={formValues.permissions} menus={allMenus} isClear={isClearButtonClick}
-                                                          setPermissionToRole={setPermissionRoles}/>}
+                <RolesPermissions data={formValues.permissions} menus={allMenusComponents} isClear={isClearButtonClick} setPermissionToRole={setPermissionRoles}/>
                 <UpsertXBy formValues={formValues} langPrefix={langPrefix}/>
             </Form>
         </Fragment>
