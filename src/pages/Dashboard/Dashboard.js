@@ -2,13 +2,11 @@ import React, { Fragment } from 'react';
 import { useTranslation } from "react-i18next";
 import { Button } from "antd";
 import useReactRouter from 'use-react-router';
-import { buildMenuFromSimpleToComplex } from "../../commons/utils/function";
-import { routes } from "../../commons/route/route";
 import { UploadFileChuck } from '../../commons/components/UploadFileChuck';
 import { endpoint } from "../../commons/constants/endpoint";
 export const Dashboard = () => {
-    const {t} = useTranslation();
-    const {history} = useReactRouter();
+    const { t } = useTranslation();
+    const { history } = useReactRouter();
 
     const onHandleClick = (url) => {
         history.push(url);
@@ -17,123 +15,123 @@ export const Dashboard = () => {
     return (
         <Fragment>
             <div>...
-                <br/>
-                <br/>
+                <br />
+                <br />
                 <Button type="primary" onClick={(e) => onHandleClick('/report-mice-booking-by-status')}>Push To Report by Status</Button>
-                <br/>
-                <br/>
+                <br />
+                <br />
                 <Button type="primary" onClick={(e) => onHandleClick('/chain-list')}>Push To Chain List</Button>
-                <br/>
-                <br/>
+                <br />
+                <br />
                 <Button type="primary" onClick={(e) => onHandleClick('/service-list')}>Push To Service List</Button>
-                <br/>
-                    <UploadFileChuck 
-                        target={process.env.REACT_APP_API_URL+endpoint.uploadFileChuckAzure} 
-                        linkDownload={process.env.REACT_APP_API_URL+endpoint.donwloadFileChuck}
-                        endpointCallCreateSession={endpoint.createSession}  
-                        endpointUploadAzureCompleted={endpoint.uploadFileAzureCompleted}
-                        isUploadAzure={true}
-                        chunkSize={1*1024*1024}
-                        dropTargetID="drop-upload-chuck" 
-                        uploaderID="upload-chuck">
-                    </UploadFileChuck>
-        
-                <br/>
+                <br />
+                <UploadFileChuck
+                    target={process.env.REACT_APP_API_URL + endpoint.uploadFileChuckAzure}
+                    linkDownload={process.env.REACT_APP_API_URL + endpoint.donwloadFileChuck}
+                    endpointCallCreateSession={endpoint.createSession}
+                    endpointUploadAzureCompleted={endpoint.uploadFileAzureCompleted}
+                    isUploadAzure={true}
+                    chunkSize={1 * 1024 * 1024}
+                    dropTargetID="drop-upload-chuck"
+                    uploaderID="upload-chuck">
+                </UploadFileChuck>
+
+                <br />
                 <Button type="primary" onClick={(e) => onHandleClick('/roles')}>Push To Role List</Button>
-                <br/>
-                <br/>
+                <br />
+                <br />
                 {t('general.errorMessageIsUse')}
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 long
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 ...
-                <br/>
+                <br />
                 content
             </div>
         </Fragment>
