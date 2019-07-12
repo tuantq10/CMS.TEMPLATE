@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState, useMemo } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useTranslation } from "react-i18next";
 import { withRouter } from "react-router-dom";
 import { Table, Button, Modal, Card, Form, Row, Col, Collapse, Icon } from 'antd';
