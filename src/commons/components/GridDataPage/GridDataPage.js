@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState, useMemo } from 'react';
 import { useTranslation } from "react-i18next";
 import { withRouter } from "react-router-dom";
 import { Table, Button, Modal, Card, Form, Row, Col, Collapse, Icon } from 'antd';
@@ -275,7 +275,6 @@ const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableCo
                    destroyOnClose={true}
                    visible={upsertPopupState.open}
                    title={upsertPopupState.id === '' ? `${t('general.titlePopUpAdd')}` : (`${actionInGrid.actionEditTitle || t('general.titlePopUpEdit')}`)}
-                   onOk={onUpsertPopupSubmit}
                    onCancel={onUpsertPopupClose}
                    footer={[
                        <Button key="back" onClick={() => upsertPopupState.id === '' ? onUpsertPopupClear() : onUpsertPopupClose()}>
@@ -289,17 +288,18 @@ const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableCo
                    okButtonProps={{disabled: upsertPopupState.submit || actionInGrid.isReadOnly}}
             >
                 <div className="modal-body">
-                    {UpsertPopup && <UpsertPopup id={upsertPopupState.id} {...upsertExtraParams || {}}
-                                                 isSubmitButtonClick={upsertPopupState.submit}
-                                                 isClearButtonClick={upsertPopupState.clear}
-                                                 callbackSubmitted={onUpsertPopupSubmitted}
-                                                 callbackCleared={onUpsertPopupCleared}
-                                                 onUpserted={onGridActionDone}
-                                                 langPrefix={langPrefix}
-                                                 isReadOnly={actionInGrid.isReadOnly}/>
-                    }
+                    <UpsertPopup id={upsertPopupState.id} {...upsertExtraParams || {}}
+                                 isSubmitButtonClick={upsertPopupState.submit}
+                                 isClearButtonClick={upsertPopupState.clear}
+                                 callbackSubmitted={onUpsertPopupSubmitted}
+                                 callbackCleared={onUpsertPopupCleared}
+                                 onUpserted={onGridActionDone}
+                                 langPrefix={langPrefix}
+                                 isReadOnly={actionInGrid.isReadOnly}/>
+
                 </div>
-            </Modal>}
+            </Modal>
+            }
             <div
                 className={`div_nk_grid ${actionInGrid.addBtnOnHeader ? `div_nk_grid_no_head` : ''} ${!actionInGrid.allowInsert && !actionInGrid.allowUpdate && !actionInGrid.allowDelete ? `padding_latest_col` : ''} ${!!actionInGrid.selectionRender ? `first_col_is_checkbox` : ''} ${className || ""}`}>
                 <Card bordered={false}>

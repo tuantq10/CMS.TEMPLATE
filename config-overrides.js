@@ -16,7 +16,7 @@ module.exports = override(
             "@link-color": "#1890ff",
             "@font-family": "'Helvetica Neue', Arial, sans-serif",
             "@form-item-margin-bottom": "0px",
-            "@animation-duration-slow": "0.1s",
+            "@animation-duration-slow": "0s",
             "@animation-duration-base": "0s",
             "@animation-duration-fast": "0s",
         },

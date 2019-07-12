@@ -17,7 +17,7 @@ export const upsertDataEffect = (url, editId, callbackSubmitted, callbackCleared
     }, []);
 
     useEffect(() => {
-        if (Object.keys(formErrors).length === 0 && isSubmitting) {
+        if (Object.keys(formErrors).length === 0 && isSubmitting && isLoading === false) {
             saveData();
         } else
             callbackSubmitted && callbackSubmitted(false);
@@ -31,9 +31,9 @@ export const upsertDataEffect = (url, editId, callbackSubmitted, callbackCleared
     };
 
     const handleSubmit = (evt) => {
+        evt && evt.preventDefault();
         setFormErrors(validate(formValues));
         setIsSubmitting(true);
-        evt && evt.preventDefault();
     };
 
     const handleSubmitWithFormValues = (fValues) => {
