@@ -5,9 +5,9 @@ export const endpoint = {
     logout: "user/logout",
     refreshToken: "user/refresh",
 
-    //menu
-    accessibleMenu: 'menus/accessible',
-    allMenu: 'menus/all',
+    //user-management
+    role: 'role',
+    user: 'user',
 
     service: 'services',
     chainsNewType: 'chains',
@@ -18,7 +18,6 @@ export const endpoint = {
     propertiesDdlByChainOrLocation: 'properties/ddl-by-chain-location',
     serviceCategory: 'categories',
     property: 'properties',
-    role: 'role',
 
     //uoloadFile
     createSession:"uploadfile/create",

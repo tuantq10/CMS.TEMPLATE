@@ -38,7 +38,7 @@
     "redux-thunk": "^2.3.0",
     "toastr": "^2.1.4",
     "use-react-router": "^1.0.7",
-    "validator": "^11.0.0"
+    "validator": "^11.1.0"
   },
   "scripts": {
     "clean": "rimraf ./build",

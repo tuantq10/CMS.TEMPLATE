@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tooltip, Spin, Button } from "antd";
+import { Tooltip, Spin, Button, Switch, Form, Checkbox } from "antd";
 import { useTranslation } from "react-i18next";
 import { formatUTCDateTime } from "../../utils/function";
 import './CustomComponents.less';
@@ -49,5 +49,18 @@ export const UpsertXBy = ({formValues}) => {
         <div className="creator-modifier-dv">
             {[creator, modifier].filter(Boolean).join(' | ')}
         </div>
+    );
+};
+
+export const SwitchCustom = ({name, value, onChange, disabled}) => {
+
+    const handleChange = (checked) => {
+        onChange && onChange(name, checked);
+    };
+
+    return (
+        <Form.Item>
+            <Switch name={name} checked={value || false} onChange={handleChange} disabled={!!disabled}/>
+        </Form.Item>
     );
 };

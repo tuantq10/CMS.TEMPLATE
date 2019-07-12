@@ -94,7 +94,7 @@ const CreateFormPageX = ({currentRoutePath, UpsertPopup, langPrefix, upsertExtra
             {/*    </MessageBoxFunctionalLayout>*/}
             {/*</Modal>*/}
             {/*}*/}
-            {validPermission(constants.Permissions.Insert, currentRoutePath) &&
+            {validPermission(constants.Permissions.create, currentRoutePath) &&
             <div>
                 <Card bordered={false}>
                     <UpsertPopup id={upsertPopupState.id}

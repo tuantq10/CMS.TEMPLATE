@@ -17,6 +17,7 @@ export const error_en = {
     //Role Issue
     11001: "Role not found",
     11002: "Role is existed",
+    11003: "Role is used",
 };
 
 export const error_vn = {
@@ -38,4 +39,5 @@ export const error_vn = {
     //Role Issue
     11001: "Role not found",
     11002: "Role is existed",
+    11003: "Role is used",
 };

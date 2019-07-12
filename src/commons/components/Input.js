@@ -1,6 +1,6 @@
 import { DatePicker as AntDatePicker, Form, Input, Tooltip, Icon, Checkbox } from 'antd';
 import * as moment from 'moment';
-import React, { useState, forwardRef, Fragment } from 'react';
+import React, { useState, forwardRef } from 'react';
 import { constants } from "../constants/constants";
 import NumberFormat from 'react-number-format';
 import { useTranslation } from "react-i18next";

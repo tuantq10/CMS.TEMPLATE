@@ -199,7 +199,7 @@ class MainCheck extends Component {
 
                 // User Management
                 case '/users':
-                    return Layout.UserList;
+                    return Layout.Users;
                 case '/create-user':
                     return Layout.CreateUser;
                 case '/roles':
@@ -222,7 +222,7 @@ class MainCheck extends Component {
                     {/*User Management*/}
                     <PrivateRoute path="/roles" component={Layout.Roles}/>
                     <PrivateRoute path="/create-user" component={Layout.CreateUser}/>
-                    <PrivateRoute path="/users" component={Layout.UserList}/>
+                    <PrivateRoute path="/users" component={Layout.Users}/>
                     {/*Setting*/}
                     <PrivateRoute path="/area-list" component={Layout.AreaList}/>
                     <PrivateRoute path="/chain-list" component={Layout.ChainList}/>

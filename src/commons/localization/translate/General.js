@@ -53,6 +53,8 @@ export const general_en = {
     permissionError: "You do not have permission",
     isRequired: "Is required",
     errorTokenExpired: "Your token expired! You will be direct to login page after 5s...",
+    errorEmail: "Email is not valid",
+    connectionError: "Connection Error",
 };
 
 export const general_vn = {
@@ -110,4 +112,6 @@ export const general_vn = {
     permissionError: "You do not have permission",
     isRequired: "Is required",
     errorTokenExpired: "Your token expired! You will be direct to login page after 5s...",
+    errorEmail: "Email is not valid",
+    connectionError: "Connection Error",
 };

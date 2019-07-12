@@ -8,8 +8,7 @@ import { routes } from "../../commons/route/route";
 export function loadMenuRequest() {
     return (dispatch) => {
         return callAuthApi(endpoint.profile).then(res => {
-            validErrorCode(res.status);
-            if (res.status === 200 && res.data.data) {
+            if (res && res.status === 200 && res.data.data) {
                 const menusAfterFormat = buildMenuFromSimpleToComplex(routes, res.data.data.permissions);
                 let {menus, menusWithPermission} = getMenu(menusAfterFormat);
                 dispatch(loadMenu(menus, menusWithPermission));
