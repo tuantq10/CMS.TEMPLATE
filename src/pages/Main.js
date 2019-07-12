@@ -6,6 +6,7 @@ import { CreateServiceItem } from "./ServiceList/CreateServiceItem";
 import { ChainList } from './ChainList/ChainList';
 import { PageNotFound } from "./PageNotFound/PageNotFound";
 import { Roles } from "./Roles/Roles";
+import { Users } from "./Users/Users";
 
 export default {
     Login,
@@ -16,4 +17,5 @@ export default {
     ChainList,
     PageNotFound,
     Roles,
+    Users,
 }

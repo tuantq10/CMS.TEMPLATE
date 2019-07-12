@@ -12,6 +12,7 @@ export const profile_en = {
     errorNotMatch: "Confirm password not match",
     successChangePassword: "Change password success, Please login again",
     changePasswordSuccess: "Change password success! Your session expired. Please re-login to continue",
+    errorPhoneNumber: "Phone number must at least 10 characters, max 11 characters",
 };
 
 export const profile_vn = {
@@ -28,5 +29,6 @@ export const profile_vn = {
     errorNotMatch: "Xác nhận mật khẩu không trùng khớp",
     successChangePassword: "Đổi mật khẩu thành công. Vui lòng đăng nhập lại",
     changePasswordSuccess: "Đổi mật khẩu thành công! Vui lòng đăng nhập lại",
+    errorPhoneNumber: "Phone number must at least 10 characters, max 11 characters",
 };
 

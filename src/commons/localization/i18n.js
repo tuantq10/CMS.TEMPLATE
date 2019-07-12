@@ -11,6 +11,7 @@ import { serviceList_en, serviceList_vn } from "./translate/ServiceList";
 import { profile_en, profile_vn } from "./translate/Profile";
 import { roles_en, roles_vn } from "./translate/Roles";
 import { error_en, error_vn } from "./translate/Error";
+import { user_en, user_vn } from "./translate/Users";
 
 i18n
     .use(Backend)
@@ -28,6 +29,7 @@ i18n
                     "profile": profile_en,
                     "roles": roles_en,
                     "error": error_en,
+                    "users": user_en,
                 }
             },
             vn: {
@@ -39,6 +41,7 @@ i18n
                     "serviceList": serviceList_vn,
                     "roleList": roles_vn,
                     "error": error_vn,
+                    "users": user_vn,
                 }
             }
         },

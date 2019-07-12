@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import GridDataPage from '../../commons/components/GridDataPage/GridDataPage';
 import { useTranslation } from "react-i18next";
 import { formatUTCDateTime, validPermission } from "../../commons/utils/function";
@@ -6,10 +6,15 @@ import { constants } from "../../commons/constants/constants";
 import { endpoint } from "../../commons/constants/endpoint";
 import { UpsertRoles } from "./UpsertRoles";
 import { WrapText } from "../../commons/components/CustomComponents/CustomComponents";
+import { actGetAllMenuRequest } from "../../services/actions/actionMenu";
+import { useDispatch, useSelector } from "react-redux";
 
 export const Roles = () => {
     const currentRoutePath = 'roles';
     const langPrefix = 'roles';
+    const dispatch = useDispatch();
+    const menusState = useSelector(state => state.reducerMenu);
+    const [allMenus, setAllMenus] = useState(null);
 
     const {t} = useTranslation();
 
@@ -25,6 +30,17 @@ export const Roles = () => {
         1: 'CreatedDate'
     };
 
+    useEffect(() => {
+        dispatch(actGetAllMenuRequest());
+    }, []);
+
+
+    useEffect(() => {
+        if (menusState !== null && menusState && menusState.allMenus && menusState.allMenus.length > 0) {
+            setAllMenus(menusState.allMenus);
+        }
+    }, [menusState]);
+
     return (
         <Fragment>
             {validPermission(constants.Permissions.view, currentRoutePath) &&
@@ -35,19 +51,20 @@ export const Roles = () => {
                 sortColumnMapping={sortColumnMapping}
                 UpsertPopup={UpsertRoles}
                 upsertPopupWidth={800}
+                upsertExtraParams={{allMenusComponents: allMenus}}
                 tableColumns={[
                     {
                         title: 'Name',
                         isEditableField: 'name',
                         dataIndex: 'name',
                         key: '0',
-                        width: 800,
                     },
                     {
                         title: 'Created Date',
                         dataIndex: 'createdDate',
                         key: '1',
                         render: text => <WrapText text={formatUTCDateTime(text)}/>,
+                        width: 150,
                     }
                 ]}
             />}

@@ -311,8 +311,7 @@ const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableCo
                         </Row>
                     </Form>
                 </Card>
-                <Table defaultSortOrder="ascend"
-                       rowSelection={!!actionInGrid.selectionRender ? rowSelection : null}
+                <Table rowSelection={!!actionInGrid.selectionRender ? rowSelection : null}
                        pagination={false}
                        rowKey={record => record.id}
                        dataSource={data.data}

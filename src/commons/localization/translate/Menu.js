@@ -41,7 +41,7 @@ export const menu_en = {
 
     //user
     usermanagement: "USER MANAGEMENT",
-    userlist: "User List",
+    userlist: "Users",
     createuser: "Create User",
     roles: "Roles",
 
@@ -97,7 +97,7 @@ export const menu_vn = {
 
     //user management
     usermanagement: "QUẢN LÝ NGƯỜI DÙNG",
-    userlist: "User List",
+    userlist: "Users",
     createuser: "Create User",
     roles: "Roles",
 

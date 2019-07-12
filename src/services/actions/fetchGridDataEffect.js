@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useRef, useState, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { callAuthApi, authApi } from '../../commons/utils/apiCaller';
-import { alertMessage, detectReturnMessage, buildQueryStringFetchData } from '../../commons/utils/function';
+import { alertMessage, buildQueryStringFetchData, getErrorMessage } from '../../commons/utils/function';
 
 export const fetchGridDataEffect = (fetchUrl, removeUrl, sortColumnMapping, callbackRemoved, initialQueryParams, initialData, onDeleted) => {
     const {t} = useTranslation();
@@ -95,7 +95,7 @@ export const fetchGridDataEffect = (fetchUrl, removeUrl, sortColumnMapping, call
                     onDeleted && onDeleted();
                 }
             } else {
-                msg = detectReturnMessage(result.data.errors);
+                msg = getErrorMessage(result);
             }
         } catch (error) {
         }

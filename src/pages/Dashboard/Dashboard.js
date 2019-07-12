@@ -22,10 +22,8 @@ export const Dashboard = () => {
                 <Button type="primary" onClick={(e) => onHandleClick('/report-mice-booking-by-status')}>Push To Report by Status</Button>
                 <br/>
                 <br/>
-                <Button type="primary" onClick={(e) => onHandleClick('/chain-list')}>Push To Chain List</Button>
+                <Button type="primary" onClick={(e) => onHandleClick('/users')}>Push To Users</Button>
                 <br/>
-                <br/>
-                <Button type="primary" onClick={(e) => onHandleClick('/service-list')}>Push To Service List</Button>
                 <br/>
                     <UploadFileChuck 
                         target={process.env.REACT_APP_API_URL+endpoint.uploadFileChuckAzure} 
@@ -39,7 +37,7 @@ export const Dashboard = () => {
                     </UploadFileChuck>
         
                 <br/>
-                <Button type="primary" onClick={(e) => onHandleClick('/roles')}>Push To Role List</Button>
+                <Button type="primary" onClick={(e) => onHandleClick('/roles')}>Push To Roles</Button>
                 <br/>
                 <br/>
                 {t('general.errorMessageIsUse')}

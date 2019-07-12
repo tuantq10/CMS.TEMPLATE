@@ -16,8 +16,7 @@ export const actLoginRequest = (login) => {
                 "GoogleCaptchaResponse": login.capChaValue,
             };
             callApi(endpoint.auth, null, data, 'POST').then(res => {
-                validErrorCode(res.status);
-                login.isSuccess = res.status === 200;
+                login.isSuccess = res && res.status === 200;
                 if (login.isSuccess) {
                     setLoginLocalStorage({
                         [`${constants.AuthenKey}`]: res.data.accessToken,
