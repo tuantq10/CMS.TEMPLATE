@@ -25,8 +25,7 @@ export const Dashboard = () => {
                 <br />
                 <UploadFileChuck
                     target={process.env.REACT_APP_API_URL + endpoint.uploadFileChuckAzure}
-                    linkDownload={process.env.REACT_APP_API_URL + endpoint.donwloadFileChuck}
-                    endpointCallCreateSession={endpoint.createSession}
+                   endpointCallCreateSession={endpoint.createSession}
                     endpointUploadAzureCompleted={endpoint.uploadFileAzureCompleted}
                     isUploadAzure={true}
                     chunkSize={1 * 1024 * 1024}

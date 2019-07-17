@@ -18,7 +18,7 @@ export const UploadFileChuck = ({ target, endpointCallCreateSession, endpointUpl
   }
   const onCallSuccess = async (file) => {
     if (endpointUploadAzureCompleted && isUploadAzure) {
-      await callApi(endpointUploadAzureCompleted, {}, {
+      let result = await callApi(endpointUploadAzureCompleted, {}, {
         sessionId: sessionId
       }, "POST");
     }
@@ -31,6 +31,9 @@ export const UploadFileChuck = ({ target, endpointCallCreateSession, endpointUpl
         service={target}
         onUploadCompleted={(data) => {
           onCallSuccess(data);
+        }}
+        onFileAdded={(file, resumable) => {
+          createSession(file, resumable);
         }}
         onFileAdded={(file, resumable) => {
           createSession(file, resumable);

@@ -77,7 +77,7 @@ export default class UploadFileResumable extends React.Component {
         });
 
         ResumableField.on('fileSuccess', (file, fileServer) => {
-
+            file.linkDownload = fileServer.replace(/"/g, '');
             if (this.props.fileNameServer) {
                 let objectServer = JSON.parse(fileServer);
                 file.fileName = objectServer[this.props.fileNameServer];
@@ -146,16 +146,15 @@ export default class UploadFileResumable extends React.Component {
     };
 
     createFileList = () => {
-
         let markup = this.state.fileList.files.map((file, index) => {
-            let linkDownload = this.props.linkDownload;
-            console.log("file", file);
-            let sessionId = file.sessionId;
-            console.log(sessionId);
+            let linkDownload = this.props.linkDownload ? this.props.linkDownload : file.linkDownload;
+            let href = linkDownload;
+            if(file.linkDownload) {
+                href = linkDownload ? `${file.linkDownload}` : "";
+            }
             let uniqID = this.props.uploaderID + '-' + index;
             let originFile = file.file;
-            let href = linkDownload ? `${linkDownload}/${sessionId}` : "";
-            console.log(href);
+           
             let media = <a href={href}>{originFile.name}</a>;
             return <li className="thumbnail" key={uniqID}>
                 <label id={"media_" + uniqID}>{media}</label>
@@ -288,6 +287,12 @@ UploadFileResumable.defaultProps = {
     },
     onUploadCompleted: (data) => {
         console.log('complete', data);
+    },
+      onUploadCompleted: (data) => {
+        console.log('complete', data);
+    },
+    onFileSuccess: (data) => {
+        console.log('', data);
     },
     onFileRemoved: function (file) {
         return file;
