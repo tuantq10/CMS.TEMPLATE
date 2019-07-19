@@ -52,9 +52,10 @@ export const Roles = () => {
                 UpsertPopup={UpsertRoles}
                 upsertPopupWidth={850}
                 upsertExtraParams={{allMenusComponents: allMenus}}
+                wrapModalClassName="role-upsert-modal-container"
                 tableColumns={[
                     {
-                        title: 'Name',
+                        title: t(`${langPrefix}.txtRoleName`),
                         isEditableField: 'name',
                         dataIndex: 'name',
                         key: '0',
