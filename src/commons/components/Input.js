@@ -6,6 +6,18 @@ import NumberFormat from 'react-number-format';
 import { useTranslation } from "react-i18next";
 import debounce from 'lodash/debounce';
 
+export const InputInlineGrid = ({name, id ,text , handleChangeInput}) => {
+    const [value, setValue] = useState(text);
+    const handleChange =  (evt) => {
+        setValue(evt.target.value);  
+    };
+    const handleSubmit =  (evt) => {
+        handleChangeInput &&  handleChangeInput(evt);  
+    };
+    return (
+        <Input type="text" value={value} id={id} name={name} onChange={handleChange} onBlur={handleSubmit} onPressEnter={handleSubmit}/>
+    );
+};
 
 export const InputText = ({label, name, value, error, onChange, maxLength, disabled, className, placeholder, focus, type, onSubmit}) => {
     const handleChange = (evt) => {
