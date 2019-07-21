@@ -6,9 +6,7 @@ import { callAuthApi } from "../../commons/utils/apiCaller";
 import GridDataPage from '../../commons/components/GridDataPage/GridDataPage';
 import { validPermission } from "../../commons/utils/function";
 import { endpoint } from "../../commons/constants/endpoint";
-import { InputInlineGrid } from "../../commons/components/Input";
-import debounce from 'lodash/debounce';
-import { async } from 'q';
+import { InputLanguageInlineGrid } from "../../commons/components/Input";
 export const LanguageList = () => {
     const currentRoutePath = 'langauges';
     const langPrefix = 'langauges';
@@ -48,13 +46,13 @@ export const LanguageList = () => {
                             title: 'VN',
                             dataIndex: 'valueVN',
                             key: '1',
-                            render: (text, record) => <InputInlineGrid  text={text} id={record.id} name="vn" handleChangeInput={handleChange} />,
+                            render: (text, record) => <InputLanguageInlineGrid  text={text} id={record.id} name="vn" handleChangeInput={handleChange} />,
                         },
                         {
                             title: 'EN',
                             dataIndex: 'valueEN',
                             key: '2',
-                            render: (text, record) => <InputInlineGrid  text={text} id={record.id} name="en" handleChangeInput={handleChange}/>,
+                            render: (text, record) => <InputLanguageInlineGrid  text={text} id={record.id} name="en" handleChangeInput={handleChange}/>,
                         },
                         
                     ]}

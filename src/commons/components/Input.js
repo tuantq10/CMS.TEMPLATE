@@ -1,21 +1,37 @@
 import { DatePicker as AntDatePicker, Form, Input, Tooltip, Icon, Checkbox } from 'antd';
 import * as moment from 'moment';
-import React, { useState, forwardRef } from 'react';
+import React, { useState, forwardRef,useEffect } from 'react';
 import { constants } from "../constants/constants";
 import NumberFormat from 'react-number-format';
 import { useTranslation } from "react-i18next";
 import debounce from 'lodash/debounce';
 
-export const InputInlineGrid = ({name, id ,text , handleChangeInput}) => {
+export const InputLanguageInlineGrid = ({name, id ,text , handleChangeInput}) => {
     const [value, setValue] = useState(text);
+    const [status, setStatus] = useState("");
     const handleChange =  (evt) => {
         setValue(evt.target.value);  
     };
-    const handleSubmit =  (evt) => {
+    const setSuccess = debounce(() => {
+        setStatus("success");
+    }, 500);
+
+    const setNone = debounce(() => {
+        setStatus("");
+    }, 1000);
+
+    const handleSubmit = (evt) => {
         handleChangeInput &&  handleChangeInput(evt);  
+        setSuccess();
     };
+    useEffect(() => {
+        setNone();
+    }, [status]);
     return (
-        <Input type="text" value={value} id={id} name={name} onChange={handleChange} onBlur={handleSubmit} onPressEnter={handleSubmit}/>
+       <Form.Item hasFeedback validateStatus={status}>
+         <Input type="text" value={value} id={id} name={name} onChange={handleChange} onBlur={handleSubmit} onPressEnter={handleSubmit}/>
+       </Form.Item>
+
     );
 };
 
