@@ -12,7 +12,7 @@ import { async } from 'q';
 export const LanguageList = () => {
     const currentRoutePath = 'langauges';
     const langPrefix = 'langauges';
-    
+
     const sortColumnMapping = {
         0: 'id',
         1: 'valueVN',
@@ -36,10 +36,6 @@ export const LanguageList = () => {
                 <GridDataPage
                     fetchEndpoint={endpoint.language}
                     langPrefix={langPrefix}
-                    isServer={false}
-                    isEditInline={true}
-                    reloadGridFlag={realoadPage}
-                    itemUpdate={itemUpdate}
                     sortColumnMapping={sortColumnMapping}
                     tableColumns={[
                         {
