@@ -12,10 +12,11 @@ import { async } from 'q';
 export const LanguageList = () => {
     const currentRoutePath = 'langauges';
     const langPrefix = 'langauges';
-    const [realoadPage,setReloadPage] = useState(0);
-    const [itemUpdate,setitemUpdate] = useState(null);
+    
     const sortColumnMapping = {
-        0: 'Key'
+        0: 'id',
+        1: 'valueVN',
+        2: 'valueEN'
     };
   
     const uploadItem =   async (id,language,value) => {
@@ -26,7 +27,7 @@ export const LanguageList = () => {
       }
       await callAuthApi(endpoint.language, formValuesBody, 'PUT');
     }
-    
+
     const handleChange =  async (evt) => {
         await uploadItem(evt.target.id,evt.target.name,evt.target.value);
     };

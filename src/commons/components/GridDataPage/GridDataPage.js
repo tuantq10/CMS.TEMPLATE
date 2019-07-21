@@ -12,7 +12,7 @@ import './GridDataPage.less'
 import { TableSearch } from "../Input";
 
 
-const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableColumns, UpsertPopup, upsertExtraParams, langPrefix, upsertPopupWidth, filterParams, defaultSortBy, actionInGrid, toolbarBtns, filterComponents, reloadGridFlag, reloadPageIndex, onGridActionDone, className, history, itemUpdate}) => {
+const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableColumns, UpsertPopup, upsertExtraParams, langPrefix, upsertPopupWidth, filterParams, defaultSortBy, actionInGrid, toolbarBtns, filterComponents, reloadGridFlag, reloadPageIndex, onGridActionDone, className, history}) => {
     const {t} = useTranslation();
     const {confirm} = Modal;
     const initialUpsertPopupState = {id: '', open: false, submit: false, clear: false};
@@ -37,10 +37,6 @@ const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableCo
         useEffect(() => {
             reloadGridFlag > 0 && reloadGrid(true);
         }, [reloadGridFlag]);
-
-        useEffect(() => {
-            itemUpdate && updateRecord(itemUpdate);
-        }, [itemUpdate]);
 
         useEffect(() => {
             reloadPageIndex > 0 && changePageIndex(1);
@@ -193,13 +189,7 @@ const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableCo
         const filteredSelectedId = selectedRowKeys.filter(x => x !== '' && x.id !== constants.EmptyGuidId);
         setTableCxt(filteredSelectedId);
     };
-    const updateRecord = (record) => {
-        console.log(data.data);
-        console.log(record);
-        data.data.forEach(element => {
-            
-        });
-    };
+    
     const rowSelection = {
         selectedRowKeys: tableCxt,
         onChange: (selectedRowKeys, selectedRows) => {
