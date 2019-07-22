@@ -254,7 +254,8 @@ export const generateTitle = (path, isCustomTitle = false, isEdit = false) => {
                 return i18n.t('menu.salesArea');
             case '/lead-source':
                 return i18n.t('menu.leadSource');
-
+            case '/languages':
+                    return i18n.t('menu.languages');
             // User Management
             case '/user-management':
                 return i18n.t('menu.usermanagement');

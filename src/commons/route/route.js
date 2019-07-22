@@ -155,6 +155,11 @@ export const routes = [
                 "route": "lead-source",
                 "permissions": [1, 2, 3, 4],
                 "routes": []
+            },
+            {
+                "route": "languages",
+                "permissions": [1, 2, 3, 4],
+                "routes": []
             }
         ]
     },
