@@ -9,6 +9,9 @@ export const endpoint = {
     role: 'role',
     user: 'user',
 
+    //audit
+    audit: 'audit',
+
     service: 'services',
     chainsNewType: 'chains',
     propertiesDdl: 'properties/ddl',

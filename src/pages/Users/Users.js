@@ -22,8 +22,8 @@ export const Users = () => {
     };
 
     const sortColumnMapping = {
-        0: 'FullName',
-        1: 'UserName'
+        fullName: 'FullName',
+        username: 'UserName'
     };
 
     return (
@@ -37,40 +37,32 @@ export const Users = () => {
                 UpsertPopup={UpsertUsers}
                 tableColumns={[
                     {
-                        title: 'Full Name',
+                        title: t(`${langPrefix}.fullName`),
                         isEditableField: 'fullName',
                         dataIndex: 'fullName',
-                        key: '0',
                     },
                     {
-                        title: 'User Name',
+                        title: t(`${langPrefix}.userName`),
                         dataIndex: 'username',
-                        key: '1',
-                        render: text => <WrapText text={text}/>,
                     },
                     {
-                        title: 'Phone Number',
+                        title: t(`${langPrefix}.phoneNumber`),
                         dataIndex: 'phoneNumber',
-                        key: '2',
                     },
                     {
-                        title: 'Role Name',
+                        title: t(`${langPrefix}.roleName`),
                         dataIndex: 'roleName',
-                        key: '3',
-                        render: text => <WrapText text={text}/>,
                     },
                     {
-                        title: 'Active',
+                        title: t(`${langPrefix}.active`),
                         dataIndex: 'deactivated',
-                        key: '4',
                         render: text => <CheckBoxCustom value={!text} disabled={true}/>,
                         align: 'center',
                         width: 30
                     },
                     {
-                        title: 'Locked',
+                        title: t(`${langPrefix}.locked`),
                         dataIndex: 'isLocked',
-                        key: '5',
                         render: text => <CheckBoxCustom value={text} disabled={true}/>,
                         align: 'center',
                         width: 30

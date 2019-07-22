@@ -21,8 +21,8 @@ export const ChainList = () => {
     };
 
     const sortColumnMapping = {
-        0: 'Name',
-        1: 'CreatedDate'
+        name: 'Name',
+        createdDate: 'CreatedDate'
     };
 
     return (
@@ -39,7 +39,6 @@ export const ChainList = () => {
                         title: 'Name',
                         isEditableField: 'name',
                         dataIndex: 'name',
-                        key: '0'
                     },
                     {
                         title: 'Created Date',
@@ -47,7 +46,6 @@ export const ChainList = () => {
                         width: '150px',
                         dataIndex: 'createdDate',
                         render: text => <WrapText text={formatUTCDateTime(text)}/>,
-                        key: '1'
                     },
                 ]}
             />

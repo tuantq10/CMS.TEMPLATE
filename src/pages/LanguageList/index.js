@@ -9,9 +9,9 @@ export const LanguageList = () => {
   const langPrefix = "languages";
 
   const sortColumnMapping = {
-    0: "id",
-    1: "valueVN",
-    2: "valueEN"
+    id: "id",
+    valueVN: "valueVN",
+    valueEN: "valueEN"
   };
 
   return (
@@ -26,18 +26,15 @@ export const LanguageList = () => {
               title: "Id",
               isEditableField: "id",
               dataIndex: "id",
-              key: "0"
             },
             {
               title: "VN",
               dataIndex: "valueVN",
-              key: "1",
               render: (text, record) => <InputLanguageInlineGrid text={text} endpoint={endpoint.language} id={record.id} name="vn" />
             },
             {
               title: "EN",
               dataIndex: "valueEN",
-              key: "2",
               render: (text, record) => <InputLanguageInlineGrid text={text} endpoint={endpoint.language} id={record.id} name="en" />
             }
           ]}

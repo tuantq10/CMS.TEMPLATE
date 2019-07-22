@@ -45,7 +45,7 @@ export const fetchGridDataEffect = (fetchUrl, removeUrl, sortColumnMapping, call
         try {
             if (fetchUrl) {
                 if (!queryParams.orderBy && sortColumnMapping && Object.keys(sortColumnMapping).length > 0)
-                    queryParams.orderBy = `${sortColumnMapping[0]}`;
+                    queryParams.orderBy = `${sortColumnMapping[Object.keys(sortColumnMapping)[0]]}`;
 
                 var filterQuery = buildQueryStringFetchData(filterParams);
                 filterQuery += buildQueryStringFetchData(queryParams);
