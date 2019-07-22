@@ -38,6 +38,7 @@ export const menu_en = {
     contactRole: "Contact Role",
     salesArea: "Sales Area",
     leadSource: "Lead Source",
+    languages:"Languages",
 
     //user
     usermanagement: "USER MANAGEMENT",
@@ -94,6 +95,7 @@ export const menu_vn = {
     contactRole: "Contact Role",
     salesArea: "Sales Area",
     leadSource: "Lead Source",
+    languages:"Ngôn ngữ",
 
     //user management
     usermanagement: "QUẢN LÝ NGƯỜI DÙNG",

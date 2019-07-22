@@ -207,9 +207,14 @@ const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableCo
 
     const {Panel} = Collapse;
     const renderMainToolbar = () => {
+        let colNum = 24;
+        if (actionInGrid.allowInsert || toolbarBtns)
+        {
+            colNum = 22;
+        }
         return (
             <Fragment>
-                <Col span={22}>
+                <Col span={colNum}>
                     <Row gutter={26} type="flex" justify="end">
                         {
                             (filterComponents || []).map((x, k) => {

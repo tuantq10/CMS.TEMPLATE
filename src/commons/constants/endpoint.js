@@ -22,6 +22,10 @@ export const endpoint = {
     serviceCategory: 'categories',
     property: 'properties',
 
+
+    //language
+    language:"language",
+    
     //uoloadFile
     createSession:"uploadfile/create",
     uploadFileChuck:"uploadfile/upload/session/",
