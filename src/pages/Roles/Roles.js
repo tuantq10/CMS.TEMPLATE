@@ -1,11 +1,11 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import GridDataPage from '../../commons/components/GridDataPage/GridDataPage';
 import { useTranslation } from "react-i18next";
-import { formatUTCDateTime, validPermission } from "../../commons/utils/function";
+import { validPermission } from "../../commons/utils/function";
 import { constants } from "../../commons/constants/constants";
 import { endpoint } from "../../commons/constants/endpoint";
 import { UpsertRoles } from "./UpsertRoles";
-import { WrapText } from "../../commons/components/CustomComponents/CustomComponents";
+import { WrapTextWithUTCFormatDateTime } from "../../commons/components/CustomComponents/CustomComponents";
 import { actGetAllMenuRequest } from "../../services/actions/actionMenu";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -60,9 +60,9 @@ export const Roles = () => {
                         dataIndex: 'name',
                     },
                     {
-                        title: 'Created Date',
+                        title: t(`${langPrefix}.txtCreatedDate`),
                         dataIndex: 'createdDate',
-                        render: text => <WrapText text={formatUTCDateTime(text)}/>,
+                        render: text => <WrapTextWithUTCFormatDateTime text={text}/>,
                         width: 150,
                     }
                 ]}

@@ -37,31 +37,31 @@ export const Users = () => {
                 UpsertPopup={UpsertUsers}
                 tableColumns={[
                     {
-                        title: 'Full Name',
+                        title: t(`${langPrefix}.fullName`),
                         isEditableField: 'fullName',
                         dataIndex: 'fullName',
                     },
                     {
-                        title: 'User Name',
+                        title: t(`${langPrefix}.userName`),
                         dataIndex: 'username',
                     },
                     {
-                        title: 'Phone Number',
+                        title: t(`${langPrefix}.phoneNumber`),
                         dataIndex: 'phoneNumber',
                     },
                     {
-                        title: 'Role Name',
+                        title: t(`${langPrefix}.roleName`),
                         dataIndex: 'roleName',
                     },
                     {
-                        title: 'Active',
+                        title: t(`${langPrefix}.active`),
                         dataIndex: 'deactivated',
                         render: text => <CheckBoxCustom value={!text} disabled={true}/>,
                         align: 'center',
                         width: 30
                     },
                     {
-                        title: 'Locked',
+                        title: t(`${langPrefix}.locked`),
                         dataIndex: 'isLocked',
                         render: text => <CheckBoxCustom value={text} disabled={true}/>,
                         align: 'center',

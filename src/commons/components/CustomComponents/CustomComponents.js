@@ -12,6 +12,15 @@ export const WrapText = ({text}) => {
     );
 };
 
+export const WrapTextWithUTCFormatDateTime = ({text}) => {
+    const formattedText = formatUTCDateTime(text);
+    return (
+        <Tooltip title={formattedText}>
+            <span className="wrap_text">{formattedText}</span>
+        </Tooltip>
+    );
+};
+
 export const WrapLink = ({text, onClick}) => {
     return (
         <Tooltip title={text}>

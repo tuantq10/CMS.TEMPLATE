@@ -41,7 +41,7 @@ i18n
                     "menu": menu_vn,
                     "dashboard": dashboard_vn,
                     "serviceList": serviceList_vn,
-                    "roleList": roles_vn,
+                    "roles": roles_vn,
                     "error": error_vn,
                     "users": user_vn,
                     "audits": audits_vn,
