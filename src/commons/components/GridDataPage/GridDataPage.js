@@ -16,7 +16,7 @@ const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableCo
     const {t} = useTranslation();
     const {confirm} = Modal;
     const initialUpsertPopupState = {id: '', open: false, submit: false, clear: false};
-
+    
     actionInGrid = {
         allowInsert: false, allowUpdate: false, allowDelete: false, upsertRoute: '', allowSearch: true, addBtnOnHeader: false,
         selectionRender: null, actions: [], disablePaging: false, isReadOnly: false, showAdvanceSearch: true, ...(actionInGrid || {})
@@ -28,6 +28,9 @@ const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableCo
     const [tableCxt, setTableCxt] = useState(null);
 
     const {data, isLoading, isDeleting, reloadGrid, changePageIndex, changeSortBy, changeKeySearch, changeFilterParams, setRemoveId, changePageSize} = fetchGridDataEffect(fetchEndpoint, deleteEndpoint || fetchEndpoint, sortColumnMapping, undefined, filterParams, undefined, onGridActionDone);
+
+     
+
 
     if (!!actionInGrid) {
         useEffect(() => {
@@ -201,9 +204,14 @@ const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableCo
     
     const {Panel} = Collapse;
     const renderMainToolbar = () => {
+        let colNum = 24;
+        if (actionInGrid.allowInsert || toolbarBtns)
+        {
+            colNum = 22;
+        }
         return (
             <Fragment>
-                <Col span={22}>
+                <Col span={colNum}>
                     <Row gutter={26} type="flex" justify="end">
                         {
                             (filterComponents || []).map((x, k) => {
