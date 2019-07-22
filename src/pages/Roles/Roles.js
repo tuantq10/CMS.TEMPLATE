@@ -26,8 +26,8 @@ export const Roles = () => {
     };
 
     const sortColumnMapping = {
-        0: 'Name',
-        1: 'CreatedDate'
+        name: 'Name',
+        createdDate: 'CreatedDate'
     };
 
     useEffect(() => {
@@ -58,12 +58,10 @@ export const Roles = () => {
                         title: t(`${langPrefix}.txtRoleName`),
                         isEditableField: 'name',
                         dataIndex: 'name',
-                        key: '0',
                     },
                     {
                         title: 'Created Date',
                         dataIndex: 'createdDate',
-                        key: '1',
                         render: text => <WrapText text={formatUTCDateTime(text)}/>,
                         width: 150,
                     }

@@ -22,8 +22,8 @@ export const Users = () => {
     };
 
     const sortColumnMapping = {
-        0: 'FullName',
-        1: 'UserName'
+        fullName: 'FullName',
+        username: 'UserName'
     };
 
     return (
@@ -40,29 +40,22 @@ export const Users = () => {
                         title: 'Full Name',
                         isEditableField: 'fullName',
                         dataIndex: 'fullName',
-                        key: '0',
                     },
                     {
                         title: 'User Name',
                         dataIndex: 'username',
-                        key: '1',
-                        render: text => <WrapText text={text}/>,
                     },
                     {
                         title: 'Phone Number',
                         dataIndex: 'phoneNumber',
-                        key: '2',
                     },
                     {
                         title: 'Role Name',
                         dataIndex: 'roleName',
-                        key: '3',
-                        render: text => <WrapText text={text}/>,
                     },
                     {
                         title: 'Active',
                         dataIndex: 'deactivated',
-                        key: '4',
                         render: text => <CheckBoxCustom value={!text} disabled={true}/>,
                         align: 'center',
                         width: 30
@@ -70,7 +63,6 @@ export const Users = () => {
                     {
                         title: 'Locked',
                         dataIndex: 'isLocked',
-                        key: '5',
                         render: text => <CheckBoxCustom value={text} disabled={true}/>,
                         align: 'center',
                         width: 30

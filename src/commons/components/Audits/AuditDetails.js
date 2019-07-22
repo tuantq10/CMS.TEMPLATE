@@ -21,23 +21,17 @@ export const AuditDetails = ({id}) => {
                     {
                         title: 'Field Name',
                         dataIndex: 'fieldName',
-                        key: '0',
                         width: 250,
-                        render: text => <WrapText text={text}/>
                     },
                     {
                         title: 'Old Value',
                         dataIndex: 'oldValue',
-                        key: '1',
                         width: 250,
-                        render: text => <WrapText text={text}/>
                     },
                     {
                         title: 'New Value',
                         dataIndex: 'newValue',
-                        key: '2',
                         width: 250,
-                        render: text => <WrapText text={text}/>
                     },
                 ]}
             />

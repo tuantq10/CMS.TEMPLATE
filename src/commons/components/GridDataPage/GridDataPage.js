@@ -47,7 +47,7 @@ const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableCo
         let result = [];
         if (cols && cols.length > 0) {
             result = cols.map((item, idx) => {
-                if (sortColumnMapping && sortColumnMapping[[idx]]) {
+                if (sortColumnMapping && sortColumnMapping[[item.dataIndex]]) {
                     item['defaultSortOrder'] = 'descend';
                     item['sorter'] = (a, b) => a.dataIndex - b.dataIndex;
                 }
@@ -61,6 +61,8 @@ const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableCo
                             children: <WrapText text={text}/>,
                             props: {colSpan: cols.length},
                         })
+                    } else if (!item.isBeginTotal && (item.render === undefined || item.render === '')) {
+                        item.render = text => <WrapText text={text}/>
                     }
                 }
 
@@ -144,7 +146,7 @@ const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableCo
     };
 
     const onHandleChange = (pagination, filters, sorter) => {
-        handleSortClick(sorter.columnKey)
+        handleSortClick(sorter.field)
     };
 
     const onUpsertPopupClose = () => {
@@ -200,16 +202,13 @@ const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableCo
     };
 
     const expandedRowRender = (record) => {
-        return (
-            ExpandedRowComponent !== undefined ? <Fragment key={record.id}><ExpandedRowComponent id={record.id}/></Fragment> : null
-        );
+        return <ExpandedRowComponent key={record.id} id={record.id}/>;
     };
 
     const {Panel} = Collapse;
     const renderMainToolbar = () => {
         let colNum = 24;
-        if (actionInGrid.allowInsert || toolbarBtns)
-        {
+        if (actionInGrid.allowInsert || toolbarBtns) {
             colNum = 22;
         }
         return (
