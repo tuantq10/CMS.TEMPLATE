@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import ReCAPTCHA from "react-google-recaptcha";
 import { Form, Button, Typography, Tooltip } from 'antd';
-import { InputText, InputPassword } from "../../commons/components/Input";
+import { InputText, InputPassword } from "~/commons/components/Input";
 import { useSelector, useDispatch } from 'react-redux';
-import { actLoginRequest, actLoginVerifyOTPRequest } from "../../services/actions/actionAuth";
+import { actLoginRequest, actLoginVerifyOTPRequest } from "~/services/actions/actionAuth";
 import { useTranslation } from "react-i18next";
-import { alertMessage } from "../../commons/utils/function";
-import logo from '../../assets/images/img-logo.jpg';
-import { constants } from "../../commons/constants/constants";
+import { alertMessage } from "~/commons/utils/function";
+import logo from '~/assets/images/img-logo.jpg';
+import { constants } from "~/commons/constants/constants";
 import useReactRouter from 'use-react-router';
 import './Login.less';
 
@@ -37,9 +37,10 @@ export const Login = () => {
 
     const handleSubmitVerifyCode = (evt) => {
         evt && evt.preventDefault();
-        setIsLoadingVerifyCode(true);
-        if (!disableVerifyCode)
+        if (!disableVerifyCode && formValues && formValues.verifyCode && formValues.verifyCode !== '') {
+            setIsLoadingVerifyCode(true);
             dispatch(actLoginVerifyOTPRequest({...formValues}));
+        }
     };
 
     const onHandleChange = (name, value) => {
@@ -100,7 +101,7 @@ export const Login = () => {
     }, [login]);
 
     return (
-        <div className={`login-box ${siteKey === '' ? `login-box-without-capcha` : ``}`}>
+        <div className={`login-box ${siteKey === '' ? `login-box-without-captcha` : ``}`}>
             <div className="text-center">
                 <Title level={2}>{t(`${langPrefix}.login_form_title`)}</Title>
                 <img src={logo} alt="logo"/>
