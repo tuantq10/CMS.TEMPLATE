@@ -11,6 +11,7 @@ export const roles_en = {
     warningAlertUserManageRole: "Are you sure want to set USER MANAGEMENT permission for this role?",
     confirmSubmitTitle: "Confirm",
     allowChangeSaleInCharge: 'Allow Change SIC',
+    txtCreatedDate: "Created Date",
 };
 
 export const roles_vn = {
@@ -20,10 +21,11 @@ export const roles_vn = {
     chkInsert: "Thêm",
     chkUpdate: "Sửa",
     chkDelete: "Xoá",
-    txtRoleName: "Tên Role",
+    txtRoleName: "Tên phân quyền",
     chkIsRestrict: "Giới hạn",
     errorMessageRole: "Vui lòng chọn quyền",
     warningAlertUserManageRole: "Are you sure want to set USER MANAGEMENT permission for this role?",
     confirmSubmitTitle: "Confirm",
     allowChangeSaleInCharge: 'Allow Change SIC',
+    txtCreatedDate: "Ngày tạo",
 };

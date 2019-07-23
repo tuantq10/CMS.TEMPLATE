@@ -1,5 +1,6 @@
 import { Login } from './Login/Login';
 import { Dashboard } from "./Dashboard/Dashboard";
+import { LanguageList } from "./LanguageList";
 import { ANoOfMiceBookingStatus } from "./Report/ANoOfMiceBookingStatus";
 import { ServiceList } from "./ServiceList/ServiceList";
 import { CreateServiceItem } from "./ServiceList/CreateServiceItem";
@@ -18,4 +19,5 @@ export default {
     PageNotFound,
     Roles,
     Users,
+    LanguageList
 }

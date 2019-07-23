@@ -1,21 +1,17 @@
 export const user_en = {
-    firstName: "First Name",
-    lastName: "Last Name",
-    userName: "Username",
-    passWord: "Password",
-    phone: "Phone",
-    role: "Role",
-    deactivated: "Deactivated",
-    isLocked: "IsLocked",
+    fullName: "Full Name",
+    userName: "User Name",
+    phoneNumber: "Phone Number",
+    roleName: "Role Name",
+    active: "Active",
+    locked: "Locked",
 };
 
 export const user_vn = {
-    firstName: "First Name",
-    lastName: "Last Name",
-    userName: "Username",
-    passWord: "Password",
-    phone: "Phone",
-    role: "Role",
-    deactivated: "Deactivated",
-    isLocked: "IsLocked",
+    fullName: "Họ và tên",
+    userName: "Tên đăng nhập",
+    phoneNumber: "Số điện thoại",
+    roleName: "Tên phân quyền",
+    active: "Kích hoạt",
+    locked: "Khoá",
 };

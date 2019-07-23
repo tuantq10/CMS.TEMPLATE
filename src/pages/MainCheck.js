@@ -132,7 +132,6 @@ class MainCheck extends Component {
                     return Layout.Login;
                 case '/dashboard':
                     return Layout.Dashboard;
-
                 //reports
                 case '/report-mice-booking-by-status':
                     return Layout.ANoOfMiceBookingStatus;
@@ -196,7 +195,8 @@ class MainCheck extends Component {
                     return Layout.SalesArea;
                 case '/lead-source':
                     return Layout.LeadSource;
-
+                case '/languages':
+                    return Layout.LanguageList;
                 // User Management
                 case '/users':
                     return Layout.Users;
@@ -247,6 +247,7 @@ class MainCheck extends Component {
                     <PrivateRoute path="/lead-source" component={Layout.LeadSource}/>
                     {/*report*/}
                     <PrivateRoute path="/dashboard" component={Layout.Dashboard}/>
+                    <PrivateRoute path="/languages" component={Layout.LanguageList}/>
                     <PrivateRoute path="/report-mice-booking-by-status" component={Layout.ANoOfMiceBookingStatus}/>
                     <PrivateRoute path="/report-mice-revenue-by-component" component={Layout.BMiceRevenueByComponents}/>
                     <PrivateRoute path="/report-booking-and-revenue-by-sales-man" component={Layout.CMiceBookingsRevenueBySalesMan}/>

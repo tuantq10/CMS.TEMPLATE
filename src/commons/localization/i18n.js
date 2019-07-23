@@ -12,6 +12,7 @@ import { profile_en, profile_vn } from "./translate/Profile";
 import { roles_en, roles_vn } from "./translate/Roles";
 import { error_en, error_vn } from "./translate/Error";
 import { user_en, user_vn } from "./translate/Users";
+import { audits_en, audits_vn } from "./translate/Audits";
 
 i18n
     .use(Backend)
@@ -30,6 +31,7 @@ i18n
                     "roles": roles_en,
                     "error": error_en,
                     "users": user_en,
+                    "audits": audits_en,
                 }
             },
             vn: {
@@ -39,9 +41,10 @@ i18n
                     "menu": menu_vn,
                     "dashboard": dashboard_vn,
                     "serviceList": serviceList_vn,
-                    "roleList": roles_vn,
+                    "roles": roles_vn,
                     "error": error_vn,
                     "users": user_vn,
+                    "audits": audits_vn,
                 }
             }
         },

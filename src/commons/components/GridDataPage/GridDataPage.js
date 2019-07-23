@@ -12,14 +12,14 @@ import './GridDataPage.less'
 import { TableSearch } from "../Input";
 
 
-const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableColumns, UpsertPopup, upsertExtraParams, langPrefix, upsertPopupWidth, filterParams, defaultSortBy, actionInGrid, toolbarBtns, filterComponents, reloadGridFlag, reloadPageIndex, onGridActionDone, className, history}) => {
+const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableColumns, UpsertPopup, upsertExtraParams, langPrefix, upsertPopupWidth, filterParams, defaultSortBy, actionInGrid, toolbarBtns, filterComponents, reloadGridFlag, reloadPageIndex, onGridActionDone, className, history, ExpandedRowComponent, wrapModalClassName}) => {
     const {t} = useTranslation();
     const {confirm} = Modal;
     const initialUpsertPopupState = {id: '', open: false, submit: false, clear: false};
 
     actionInGrid = {
         allowInsert: false, allowUpdate: false, allowDelete: false, upsertRoute: '', allowSearch: true, addBtnOnHeader: false,
-        selectionRender: null, actions: [], disablePaging: false, isReadOnly: false, showAdvanceSearch: true, ...(actionInGrid || {})
+        selectionRender: null, actions: [], disablePaging: false, isReadOnly: false, showAdvanceSearch: true, showTableHeader: true, gridBordered: false, ...(actionInGrid || {})
     };
 
     const [sortByParam, setSortByParams] = useState(defaultSortBy || {});
@@ -47,7 +47,7 @@ const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableCo
         let result = [];
         if (cols && cols.length > 0) {
             result = cols.map((item, idx) => {
-                if (sortColumnMapping && sortColumnMapping[[idx]]) {
+                if (sortColumnMapping && sortColumnMapping[[item.dataIndex]]) {
                     item['defaultSortOrder'] = 'descend';
                     item['sorter'] = (a, b) => a.dataIndex - b.dataIndex;
                 }
@@ -61,6 +61,8 @@ const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableCo
                             children: <WrapText text={text}/>,
                             props: {colSpan: cols.length},
                         })
+                    } else if (!item.isBeginTotal && (item.render === undefined || item.render === '')) {
+                        item.render = text => <WrapText text={text}/>
                     }
                 }
 
@@ -144,7 +146,7 @@ const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableCo
     };
 
     const onHandleChange = (pagination, filters, sorter) => {
-        handleSortClick(sorter.columnKey)
+        handleSortClick(sorter.field)
     };
 
     const onUpsertPopupClose = () => {
@@ -198,11 +200,20 @@ const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableCo
             }
         },
     };
+
+    const expandedRowRender = (record) => {
+        return <ExpandedRowComponent key={record.id} id={record.id}/>;
+    };
+
     const {Panel} = Collapse;
     const renderMainToolbar = () => {
+        let colNum = 24;
+        if (actionInGrid.allowInsert || toolbarBtns) {
+            colNum = 22;
+        }
         return (
             <Fragment>
-                <Col span={22}>
+                <Col span={colNum}>
                     <Row gutter={26} type="flex" justify="end">
                         {
                             (filterComponents || []).map((x, k) => {
@@ -286,6 +297,7 @@ const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableCo
                    ]}
                    confirmLoading={upsertPopupState.submit || actionInGrid.isReadOnly}
                    okButtonProps={{disabled: upsertPopupState.submit || actionInGrid.isReadOnly}}
+                   wrapClassName={wrapModalClassName}
             >
                 <div className="modal-body">
                     <UpsertPopup id={upsertPopupState.id} {...upsertExtraParams || {}}
@@ -313,12 +325,16 @@ const GridDataPage = ({fetchEndpoint, deleteEndpoint, sortColumnMapping, tableCo
                 </Card>
                 <Table rowSelection={!!actionInGrid.selectionRender ? rowSelection : null}
                        pagination={false}
-                       rowKey={record => record.id}
+                       rowKey={record => (record.id !== undefined && record.id !== '' ? record.id : Math.random())}
                        dataSource={data.data}
                        columns={buildTableColumns(tableColumns)}
                        loading={isLoading}
                        rowClassName={record => record.isTotalRow ? "grid-total-row" : null}
                        onChange={onHandleChange}
+                       expandedRowRender={ExpandedRowComponent !== undefined ? record => expandedRowRender(record) : null}
+                       expandRowByClick={true}
+                       showHeader={actionInGrid.showTableHeader}
+                       bordered={actionInGrid.gridBordered}
                 />
                 {!actionInGrid.disablePaging &&
                 <div className="grid-paginate">
