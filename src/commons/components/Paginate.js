@@ -1,7 +1,10 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { Pagination } from "antd";
+import { Pagination, LocaleProvider } from "antd";
 import parse from 'html-react-parser';
 import { useTranslation } from "react-i18next";
+import { useSelector, useStore } from "react-redux";
+import vn from 'antd/es/locale-provider/vi_VN';
+import en from 'antd/es/locale-provider/en_US';
 
 export const Paginate = ({currentPage, totalPage, totalItems, onHandleClick, onHandleChangePageSize}) => {
     const pageSizeOptions = ['10', '20', '50'];
@@ -9,11 +12,10 @@ export const Paginate = ({currentPage, totalPage, totalItems, onHandleClick, onH
     const [total, setTotal] = useState(0);
     const [currentPageNumber, setCurrentPageNumber] = useState(currentPage);
     const {t} = useTranslation();
-
+    const {lang} = useSelector(state => state.reducerLang);
     useEffect(() => {
         setCurrentPageNumber(currentPage)
     }, [currentPage]);
-
 
     useEffect(() => {
         setTotal(totalItems);
@@ -32,11 +34,14 @@ export const Paginate = ({currentPage, totalPage, totalItems, onHandleClick, onH
         return total > 0 ? parse(t("general.pagingFoundDetails").replace("{0}", total)
             .replace("{1}", range[0] + '-' + range[1]).replace("{2}", total)) : '';
     };
+
     return (
         <Fragment>
-            <Pagination showSizeChanger showQuickJumper onShowSizeChange={onShowSizeChange} defaultCurrent={1} total={total}
-                        pageSizeOptions={pageSizeOptions} pageSize={pageSize} onChange={onHandleChange} showTotal={showTotal}
-                        current={currentPageNumber} showTitle/>
+            <LocaleProvider locale={lang === 'vn' ? vn : en}>
+                <Pagination showSizeChanger showQuickJumper onShowSizeChange={onShowSizeChange} defaultCurrent={1} total={total}
+                            pageSizeOptions={pageSizeOptions} pageSize={pageSize} onChange={onHandleChange} showTotal={showTotal}
+                            current={currentPageNumber} showTitle/>
+            </LocaleProvider>
         </Fragment>
     );
 };
