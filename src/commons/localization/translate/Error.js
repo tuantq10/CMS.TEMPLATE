@@ -21,6 +21,9 @@ export const error_en = {
     11001: "Role not found",
     11002: "Role is existed",
     11003: "Role is used",
+
+    //Block IP
+    12000: "Your request has exceeded the number of times allowed. Try again later",
 };
 
 export const error_vn = {
@@ -46,4 +49,7 @@ export const error_vn = {
     11001: "Role not found",
     11002: "Role is existed",
     11003: "Role is used",
+
+    //Block IP
+    12000: "Your request has exceeded the number of times allowed. Try again later",
 };

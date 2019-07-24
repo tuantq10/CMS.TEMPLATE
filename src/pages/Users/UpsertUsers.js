@@ -100,7 +100,7 @@ export const UpsertUsers = ({id, isSubmitButtonClick, isClearButtonClick, callba
                 </Row>
                 <Row gutter={48}>
                     <Col span={6} className="form-title">
-                        <Text strong>{t(`${langPrefix}.phone`)}</Text>
+                        <Text strong>{t(`${langPrefix}.phoneNumber`)}</Text>
                     </Col>
                     <Col span={18}>
                         <InputNumOnly value={formValues.phoneNumber} onChange={handleChangeVal} error={formErrors.phoneNumber}
@@ -109,7 +109,7 @@ export const UpsertUsers = ({id, isSubmitButtonClick, isClearButtonClick, callba
                 </Row>
                 <Row gutter={48}>
                     <Col span={6} className="form-title">
-                        <Text strong>{t(`${langPrefix}.role`)}</Text>
+                        <Text strong>{t(`${langPrefix}.roleName`)}</Text>
                     </Col>
                     <Col span={18}>
                         <DropdownWithDataIdName data={roleData} placeholder="Choose role"
@@ -119,7 +119,7 @@ export const UpsertUsers = ({id, isSubmitButtonClick, isClearButtonClick, callba
                 </Row>
                 <Row gutter={48}>
                     <Col span={6} className="form-title">
-                        <Text strong>{t(`${langPrefix}.deactivated`)}</Text>
+                        <Text strong>{t(`${langPrefix}.active`)}</Text>
                     </Col>
                     <Col span={6}>
                         <SwitchCustom name="deactivated" value={formValues.deactivated} onChange={handleChangeVal}/>
@@ -127,7 +127,7 @@ export const UpsertUsers = ({id, isSubmitButtonClick, isClearButtonClick, callba
                     {id !== '' &&
                     <Fragment>
                         <Col span={6} className="form-title">
-                            <Text strong>{t(`${langPrefix}.isLocked`)}</Text>
+                            <Text strong>{t(`${langPrefix}.locked`)}</Text>
                         </Col>
                         <Col span={6}>
                             <SwitchCustom name="isLocked" value={formValues.isLocked} onChange={handleChangeVal}/>
