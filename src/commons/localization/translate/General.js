@@ -72,7 +72,7 @@ export const general_vn = {
     error: "Error",
     errorImageUpload: "Upload error or type's file not support. Please check it.",
     errorFileOverLimit: "Upload maximum {0} files",
-    search: "Search",
+    search: "Tìm kiếm",
     titlePopUpAdd: "Thêm",
     titlePopUpEdit: "Chỉnh sửa",
     titlePopUpDelete: "Xoá",
