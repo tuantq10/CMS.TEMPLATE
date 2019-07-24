@@ -1,9 +1,11 @@
 export const endpoint = {
     //auth
     auth: 'user/login',
+    auth2Factor: 'user/loginWithTwoFactorAuthenticator',
     profile: 'user/profile',
     logout: "user/logout",
     refreshToken: "user/refresh",
+    verifyCode: "user/verifyOTPCode",
 
     //user-management
     role: 'role',

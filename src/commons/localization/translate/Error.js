@@ -13,11 +13,17 @@ export const error_en = {
     10012: "Email existed",
     10013: "Token has expired",
     10014: "Invalid captcha",
+    10015: "Invalid login method",
+    10016: "Invalid send OTP",
+    10017: "Invalid OTP code",
 
     //Role Issue
     11001: "Role not found",
     11002: "Role is existed",
     11003: "Role is used",
+
+    //Block IP
+    12000: "Your request has exceeded the number of times allowed. Try again later",
 };
 
 export const error_vn = {
@@ -35,9 +41,15 @@ export const error_vn = {
     10012: "Email existed",
     10013: "Token has expired",
     10014: "Invalid captcha",
+    10015: "Invalid login method",
+    10016: "Invalid send OTP",
+    10017: "Invalid OTP code",
 
     //Role Issue
     11001: "Role not found",
     11002: "Role is existed",
     11003: "Role is used",
+
+    //Block IP
+    12000: "Your request has exceeded the number of times allowed. Try again later",
 };

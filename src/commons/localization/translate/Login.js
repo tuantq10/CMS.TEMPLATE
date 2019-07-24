@@ -7,7 +7,9 @@ export const login_en = {
     btn_forgot_password: "Submit",
     btn_close: "Close",
     errorLogin: "Login information is incorrect",
-    errorLock: "Account is locked"
+    errorLock: "Account is locked",
+    back_from_verify_code: "Sign in with another account",
+    btn_verify_otp: "Verify OTP Code",
 };
 
 export const login_vn = {
@@ -19,5 +21,7 @@ export const login_vn = {
     btn_forgot_password: "Submit",
     btn_close: "Đóng",
     errorLogin: "Thông tin đăng nhập không đúng",
-    errorLock: "Tài khảon bị khoá"
+    errorLock: "Tài khảon bị khoá",
+    back_from_verify_code: "Đăng nhập tài khoản khác",
+    btn_verify_otp: "Verify OTP Code",
 };

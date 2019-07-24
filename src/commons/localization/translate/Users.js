@@ -1,10 +1,13 @@
 export const user_en = {
     fullName: "Full Name",
     userName: "User Name",
-    phoneNumber: "Phone Number",
-    roleName: "Role Name",
+    phoneNumber: "Phone",
+    roleName: "Role",
     active: "Active",
     locked: "Locked",
+    firstName: "First Name",
+    lastName: "Last Name",
+    passWord: "Password",
 };
 
 export const user_vn = {
@@ -14,4 +17,7 @@ export const user_vn = {
     roleName: "Tên phân quyền",
     active: "Kích hoạt",
     locked: "Khoá",
+    firstName: "First Name",
+    lastName: "Last Name",
+    passWord: "Password",
 };
