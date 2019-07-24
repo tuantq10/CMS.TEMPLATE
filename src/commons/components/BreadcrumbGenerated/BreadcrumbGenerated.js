@@ -4,12 +4,14 @@ import { useSelector } from "react-redux";
 import './BreadcrumbGenerated.less'
 import useReactRouter from 'use-react-router';
 import { generateTitle } from "../../../commons/utils/function";
+import { useTranslation } from "react-i18next";
 
 
 export const BreadcrumbGenerated = () => {
     const menusState = useSelector(state => state.reducerMenu);
     const [item, setItem] = useState([]);
     const {location} = useReactRouter();
+    const {t} = useTranslation();
 
     useEffect(() => {
         if (menusState !== null && menusState && menusState.menus && menusState.menus.length > 0) {
@@ -37,7 +39,7 @@ export const BreadcrumbGenerated = () => {
     return (
         <Breadcrumb className="breadCrumb-container" separator=">">
             {item && item.map((v, i) => {
-                return (<Breadcrumb.Item key={i}>{generateTitle(v)}</Breadcrumb.Item>)
+                return (<Breadcrumb.Item key={i}>{generateTitle(t, v)}</Breadcrumb.Item>)
             })}
         </Breadcrumb>
     );
