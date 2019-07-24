@@ -174,99 +174,99 @@ export const removeAccent = (str) => {
     return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
 };
 
-export const generateTitle = (path, isCustomTitle = false, isEdit = false) => {
+export const generateTitle = (t, path, isCustomTitle = false, isEdit = false) => {
     if (path) {
         switch (path) {
             //dashboard
             case '/dashboard':
-                return i18n.t('menu.dashboard');
+                return t('menu.dashboard');
             case '/reports':
-                return i18n.t('menu.reports');
+                return t('menu.reports');
             case '/booking-list-management':
-                return i18n.t('menu.bookinglistmanagement');
+                return t('menu.bookinglistmanagement');
 
             //report
             case '/report-mice-booking-by-status':
-                return i18n.t(`${isCustomTitle ? `dashboard` : `menu`}.reportMiceBookingByStatus`);
+                return t(`${isCustomTitle ? `dashboard` : `menu`}.reportMiceBookingByStatus`);
             case '/report-mice-revenue-by-component':
-                return i18n.t(`${isCustomTitle ? `dashboard` : `menu`}.reportMiceRevenueByComponent`);
+                return t(`${isCustomTitle ? `dashboard` : `menu`}.reportMiceRevenueByComponent`);
             case '/report-booking-and-revenue-by-sales-man':
-                return i18n.t(`${isCustomTitle ? `dashboard` : `menu`}.reportBookingAndRevenueBySalesMan`);
+                return t(`${isCustomTitle ? `dashboard` : `menu`}.reportBookingAndRevenueBySalesMan`);
             case '/report-booking-and-revenue-by-industry':
-                return i18n.t(`${isCustomTitle ? `dashboard` : `menu`}.reportBookingAndRevenueByIndustry`);
+                return t(`${isCustomTitle ? `dashboard` : `menu`}.reportBookingAndRevenueByIndustry`);
             case '/guest-room-type-calendar':
-                return i18n.t(`${isCustomTitle ? `dashboard` : `menu`}.guestRoomTypeCalendar`);
+                return t(`${isCustomTitle ? `dashboard` : `menu`}.guestRoomTypeCalendar`);
 
             // Sales Management
             case '/sales-management':
-                return i18n.t('menu.salesmanagement');
+                return t('menu.salesmanagement');
             case '/venue-calendar':
-                return i18n.t('menu.venuecalendar');
+                return t('menu.venuecalendar');
             case '/create-booking':
-                return i18n.t(`menu.${isEdit ? `edit` : `create`}booking`);
+                return t(`menu.${isEdit ? `edit` : `create`}booking`);
 
             // Service Management
             case '/service-management':
-                return i18n.t('menu.servicemanagement');
+                return t('menu.servicemanagement');
             case '/service-list':
-                return i18n.t('menu.servicelist');
+                return t('menu.servicelist');
             case '/create-service':
-                return i18n.t('menu.createserviceitems');
+                return t('menu.createserviceitems');
 
             // Account
             case '/account-management':
-                return i18n.t('menu.accountmanagement');
+                return t('menu.accountmanagement');
             case '/account-list':
-                return i18n.t('menu.accountlist');
+                return t('menu.accountlist');
             case '/create-account':
-                return i18n.t(`menu.${isEdit ? `edit` : `create`}account`);
+                return t(`menu.${isEdit ? `edit` : `create`}account`);
 
             // Setting
             case '/settings':
-                return i18n.t('menu.setting');
+                return t('menu.setting');
             case '/property-list':
-                return i18n.t('menu.propertylist');
+                return t('menu.propertylist');
             case '/create-property':
-                return i18n.t('menu.createproperty');
+                return t('menu.createproperty');
             case '/venue-list':
-                return i18n.t('menu.venuelist');
+                return t('menu.venuelist');
             case '/create-venue':
-                return i18n.t('menu.createvenue');
+                return t('menu.createvenue');
             case '/highlight':
-                return i18n.t('menu.highlight');
+                return t('menu.highlight');
             case '/maintenance':
-                return i18n.t('menu.maintenance');
+                return t('menu.maintenance');
             case '/service-category-list':
-                return i18n.t('menu.servicecategorylist');
+                return t('menu.servicecategorylist');
             case '/industry-list':
-                return i18n.t('menu.industrylist');
+                return t('menu.industrylist');
             case '/area-list':
-                return i18n.t('menu.arealist');
+                return t('menu.arealist');
             case '/chain-list':
-                return i18n.t('menu.chainlist');
+                return t('menu.chainlist');
             case '/venue-setup-list':
-                return i18n.t('menu.venuesetuplist');
+                return t('menu.venuesetuplist');
             case '/event-type':
-                return i18n.t('menu.eventType');
+                return t('menu.eventType');
             case '/contact-role':
-                return i18n.t('menu.contactRole');
+                return t('menu.contactRole');
             case '/sales-area':
-                return i18n.t('menu.salesArea');
+                return t('menu.salesArea');
             case '/lead-source':
-                return i18n.t('menu.leadSource');
+                return t('menu.leadSource');
             case '/languages':
-                    return i18n.t('menu.languages');
+                return t('menu.languages');
             // User Management
             case '/user-management':
-                return i18n.t('menu.usermanagement');
+                return t('menu.usermanagement');
             case '/users':
-                return i18n.t('menu.userlist');
+                return t('menu.userlist');
             case '/create-user':
-                return i18n.t('menu.createuser');
+                return t('menu.createuser');
             case '/roles':
-                return i18n.t('menu.roles');
+                return t('menu.roles');
             default:
-                return i18n.t('menu.reports');
+                return t('menu.reports');
         }
     }
 };

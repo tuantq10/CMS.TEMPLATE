@@ -8,12 +8,14 @@ import './Navigation.less';
 import { Link } from "react-router-dom";
 import { generateTitle } from "../../../commons/utils/function";
 import logo from '../../../assets/images/img-logo.jpg'
+import { useTranslation } from "react-i18next";
 
 const {Sider} = Layout;
 const {SubMenu} = Menu;
 
 export const Navigation = ({isCollapsed, width}) => {
     const {location} = useReactRouter();
+    const {t} = useTranslation();
     const [collapsed, setCollapsed] = useState(isCollapsed || false);
     const [currentMenu, setCurrentMenu] = useState(null);
     const [rootSubmenuKeys, setRootSubmenuKeys] = useState([]);
@@ -105,13 +107,13 @@ export const Navigation = ({isCollapsed, width}) => {
                         <SubMenu key={route.path} title={
                             <span>
                                 {MenuIcon(route.path)}
-                                <span>{generateTitle(route.title)}</span>
+                                <span>{generateTitle(t, route.title)}</span>
                                 </span>
                         }>
                             {
                                 route.sub.map((i, k) => {
                                     return (
-                                        <Menu.Item key={i.path}>{generateTitle(i.title)}
+                                        <Menu.Item key={i.path}>{generateTitle(t, i.title)}
                                             <Link to={{pathname: i.path}}/>
                                         </Menu.Item>
                                     );
@@ -124,7 +126,7 @@ export const Navigation = ({isCollapsed, width}) => {
                         <Menu.Item key={route.path}>
                             <Link to={{pathname: route.path}}>
                                 {MenuIcon(route.path)}
-                                <span>{generateTitle(route.title)}</span>
+                                <span>{generateTitle(t, route.title)}</span>
                             </Link>
                         </Menu.Item>
                     );

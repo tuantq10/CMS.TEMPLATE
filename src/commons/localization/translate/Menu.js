@@ -99,9 +99,9 @@ export const menu_vn = {
 
     //user management
     usermanagement: "QUẢN LÝ NGƯỜI DÙNG",
-    userlist: "Users",
+    userlist: "Người Dùng",
     createuser: "Create User",
-    roles: "Roles",
+    roles: "Phân Quyền",
 
     //report
     reportMiceBookingByStatus: "By Status",

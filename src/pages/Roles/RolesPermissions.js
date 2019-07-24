@@ -6,9 +6,11 @@ import { constants } from "../../commons/constants/constants";
 import { Divider } from "antd";
 import { routes } from "../../commons/route/route";
 import './Roles.less';
+import { useTranslation } from "react-i18next";
 
 export const RolesPermissions = memo(function RolesPermissions(props) {
     const {data, menus, isClear, setPermissionToRole} = props;
+    const {t} = useTranslation();
     const {Text} = Typography;
     const [formValuesRoles, setFormValuesRoles] = useState({});
     const [formValuesParent, setFormValuesParent] = useState({});
@@ -232,7 +234,7 @@ export const RolesPermissions = memo(function RolesPermissions(props) {
                                 <CheckBoxCustom name={`${routeName}_${objAction[1]}`} value={formValuesParent[`${routeName}_${objAction[1]}`]} onChange={handleCheckForParent}/>
                             </Col>
                             <Col span={20} className="form-title-parent">
-                                <Text strong>{generateTitle(`${constants.Slash + routeName}`)}</Text>
+                                <Text strong>{generateTitle(t, `${constants.Slash + routeName}`)}</Text>
                             </Col>
                         </Row>
                         <Divider className="parent-divider"/>
@@ -246,7 +248,7 @@ export const RolesPermissions = memo(function RolesPermissions(props) {
                                         <Row gutter={48} key={childRouteName} justify="end">
                                             <Col span={1}/>
                                             <Col span={8} className="form-title">
-                                                <Text strong>{generateTitle(`${constants.Slash + childRouteName}`)}</Text>
+                                                <Text strong>{generateTitle(t, `${constants.Slash + childRouteName}`)}</Text>
                                             </Col>
                                             {permissions && permissions.map((permission, index) => {
                                                 const chkName = objAction[permission];

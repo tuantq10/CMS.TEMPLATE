@@ -9,10 +9,12 @@ import { constants } from "../../commons/constants/constants";
 import { Layout, PageHeader } from 'antd';
 import useReactRouter from 'use-react-router';
 import './ContainerIndex.less';
+import { useTranslation } from "react-i18next";
 
 const {Header, Content, Footer} = Layout;
 
 export const ContainerIndex = (props) => {
+    const {t} = useTranslation();
     const {location} = useReactRouter();
     const [purePath, setPurePath] = useState('');
     const [isEditTitle, setIsEditTitle] = useState(false);
@@ -32,7 +34,7 @@ export const ContainerIndex = (props) => {
                 <Navigation/>
                 <Layout>
                     <Header className="header-container">
-                        <PageHeader className="page-header" title={generateTitle(purePath, true, isEditTitle)}
+                        <PageHeader className="page-header" title={generateTitle(t, purePath, true, isEditTitle)}
                                     extra={[<AccountInfo key="account-info"/>, <SelectLang key="select-language"/>, <SignOut key="signOut"/>]}/>
                     </Header>
                     <Content className="content-container">
