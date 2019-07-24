@@ -55,6 +55,7 @@ export const general_en = {
     errorTokenExpired: "Your token expired! You will be direct to login page after 5s...",
     errorEmail: "Email is not valid",
     connectionError: "Connection Error",
+    pagingFoundDetails: "Founded {0} item(s). Showing {1} of {2} items.",
 };
 
 export const general_vn = {
@@ -114,4 +115,5 @@ export const general_vn = {
     errorTokenExpired: "Your token expired! You will be direct to login page after 5s...",
     errorEmail: "Email is not valid",
     connectionError: "Connection Error",
+    pagingFoundDetails: "Tìm thấy {0} dữ liệu. Thể hiện {1} / {2}.",
 };
